@@ -19,12 +19,12 @@ parts:
 
   - caption: Fluid Dynamics
     chapters: 
-      - file: chapter4/steadyStokes
+      - file: chapter3/steadyStokes
         sections:
-        - file: chapter4/channel_stokes.ipynb
-      - file: chapter4/unsteadyNS
+        - file: chapter3/channel_stokes.ipynb
+      - file: chapter3/unsteadyNS
         sections:
-        - file: chapter4/channel_unsteadyNS.ipynb
+        - file: chapter3/channel_unsteadyNS.ipynb
   - caption: Appendix
     chapters:
       - file: biblio

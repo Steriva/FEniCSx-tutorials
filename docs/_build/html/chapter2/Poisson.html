@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Steady Stokes &#8212; Tutorials for FEniCSx</title>
+    <title>Poisson &#8212; Tutorials for FEniCSx</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -145,7 +145,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
-   Steady Stokes
+   Poisson
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -168,7 +168,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter4/steadyStokes.html">
+  <a class="reference internal" href="../chapter3/steadyStokes.html">
    Steady Stokes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -178,14 +178,14 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/channel_stokes.html">
+    <a class="reference internal" href="../chapter3/channel_stokes.html">
      Implementation
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter4/unsteadyNS.html">
+  <a class="reference internal" href="../chapter3/unsteadyNS.html">
    Unsteady Navier-Stokes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
@@ -195,7 +195,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter4/channel_unsteadyNS.html">
+    <a class="reference internal" href="../chapter3/channel_unsteadyNS.html">
      Implementation
     </a>
    </li>
@@ -368,23 +368,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivation-of-the-weak-formulation">
+   Derivation of the weak formulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algebraic-system">
+   Algebraic system
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Steady Stokes</h1>
+                <h1>Poisson</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivation-of-the-weak-formulation">
+   Derivation of the weak formulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#algebraic-system">
+   Algebraic system
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -392,16 +439,46 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="steady-stokes">
-<h1>Steady Stokes<a class="headerlink" href="#steady-stokes" title="Permalink to this headline">#</a></h1>
-<p>Whether you write your book’s content in Jupyter Notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) or
-in regular markdown files (<code class="docutils literal notranslate"><span class="pre">.md</span></code>), you’ll write in the same flavor of markdown
-called <strong>MyST Markdown</strong>.
-This is a simple file to help you get started and show off some syntax.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0207c425-6df5-4ee3-afb2-11e996a1e78d">
-<span class="eqno">(8)<a class="headerlink" href="#equation-0207c425-6df5-4ee3-afb2-11e996a1e78d" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\Delta u = 0
+  <div class="tex2jax_ignore mathjax_ignore section" id="poisson">
+<h1>Poisson<a class="headerlink" href="#poisson" title="Permalink to this headline">#</a></h1>
+<p>The first problem that will be analysed is an elliptic equation, i.e. the Poisson problem</p>
+<div class="amsmath math notranslate nohighlight" id="equation-64079820-7c8a-4bee-ae55-140934de5d93">
+<span class="eqno">(8)<a class="headerlink" href="#equation-64079820-7c8a-4bee-ae55-140934de5d93" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\left\{
+    \begin{array}{ll}
+        -\nabla \cdot \left(k\nabla T) = q''' &amp; \mathbf{x}\in\Omega\\
+        T = T_D &amp; \mathbf{x}\in\Gamma_{D}\\
+        -k\frac{\partial T}{\partial \mathbf{n}} = g_N &amp; \mathbf{x}\in\Gamma_{N}\\
 \end{equation}\]</div>
+<p>which can describe the temperature distribution inside a material.</p>
+<div class="section" id="derivation-of-the-weak-formulation">
+<h2>Derivation of the weak formulation<a class="headerlink" href="#derivation-of-the-weak-formulation" title="Permalink to this headline">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{V}\subset\mathcal{H}^1, \mathcal{V}_0\subset\mathcal{H}^1\)</span> the trial and test space defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{V} = \left\{v\in\mathcal{H}^1:\;\left. v\right|_{\Gamma_D} = T_D\right\}\qquad 
+\mathcal{V}_0 = \left\{v\in\mathcal{H}^1:\;\left. v\right|_{\Gamma_D} = 0\right\}
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\varphi\in\mathcal{V}_0\)</span> be the test function, then the strong problem is multiplied in scalar sense by it</p>
+<div class="math notranslate nohighlight">
+\[
+-\int_\Omega\nabla \cdot \left(k\nabla T\right),\,\varphi\,d\Omega = \int_\Omega q'''\,\varphi\,d\Omega
+\]</div>
+<p>we can apply the integration by parts to get the weak formulation</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1ccf55c1-b33d-425b-ab1e-964f02236579">
+<span class="eqno">(9)<a class="headerlink" href="#equation-1ccf55c1-b33d-425b-ab1e-964f02236579" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_\Omega k\nabla T\cdot\nabla\varphi\,d\Omega = \int_\Omega q'''\,\varphi\,d\Omega + \int_{\Gamma_N}g_N\,\varphi\,d\sigma
+\end{equation}\]</div>
+</div>
+<div class="section" id="algebraic-system">
+<h2>Algebraic system<a class="headerlink" href="#algebraic-system" title="Permalink to this headline">#</a></h2>
+<p>The weak formulation can be then reduced to a linear system of equation by introducing the finite dimensional representation of the spaces <span class="math notranslate nohighlight">\(\left(T \simeq \sum_nt_n\phi_n\right)\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+A\mathbf{t} = \mathbf{f}
+\]</div>
+<p>It’s worth noticing that the matrix <span class="math notranslate nohighlight">\(A\)</span> is symmetric, thus a conjugate gradient solver can be used.</p>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>
