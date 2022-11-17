@@ -6,7 +6,7 @@ The first problem that will be analysed is an elliptic equation, i.e. the Poisso
     \begin{array}{ll}
         -\nabla \cdot \left(k\nabla T) = q''' & \mathbf{x}\in\Omega\\
         T = T_D & \mathbf{x}\in\Gamma_{D}\\
-        -k\frac{\partial T}{\partial \mathbf{n}} = g_N & \mathbf{x}\in\Gamma_{N}\\
+        -k\frac{\partial T}{\partial \mathbf{n}} = g_N & \mathbf{x}\in\Gamma_{N}
     \end{array}
 \right.
 \end{equation}
