@@ -8,6 +8,7 @@ parts:
   - caption: General Overview of Finite Elements
     chapters:
       - file: chapter1/InstallationNotes
+      - file: chapter1/FunctionalAnalysis
       - file: chapter1/WeakFormulations
 
   - caption: Stokes Problem

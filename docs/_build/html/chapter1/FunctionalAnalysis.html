@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Backward Facing Step &#8212; Tutorials for FEniCSx</title>
+    <title>Elements of Functional Analysis &#8212; Tutorials for FEniCSx</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -33,7 +34,6 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -54,10 +54,10 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Notebook Example" href="notebookExe.html" />
-    <link rel="prev" title="Installation notes" href="Installation.html" />
+    <link rel="next" title="Weak Formulations" href="WeakFormulations.html" />
+    <link rel="prev" title="Installation notes" href="InstallationNotes.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
@@ -117,18 +117,35 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Theory
+  General Overview of Finite Elements
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="InstallationNotes.html">
+   Installation notes
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Elements of Functional Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="WeakFormulations.html">
+   Weak Formulations
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Stokes Problem
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../chapter1/MadelungTransformation.html">
-   Madelung Transformation
-  </a>
- </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter1/ISFalgo.html">
-   ISF algorithm
+  <a class="reference internal" href="../chapter2/channel2D.html">
+   Internal Channel Flow (2D)
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -137,41 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter1/WeakFormulations.html">
-     Weak Formulations
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  ISF Tutorials
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Installation.html">
-   Installation notes
-  </a>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
-   Backward Facing Step
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebookExe.html">
-     Notebook Example
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Implementation.html">
+    <a class="reference internal" href="../chapter2/Impl_channel.html">
      Implementation
     </a>
    </li>
@@ -279,7 +262,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter2/BFS.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter1/FunctionalAnalysis.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -307,7 +290,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapter2/BFS.md"
+        <a href="../_sources/chapter1/FunctionalAnalysis.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -344,23 +327,66 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-2-and-sobolev-spaces">
+   <span class="math notranslate nohighlight">
+    \(L^2\)
+   </span>
+   and Sobolev spaces
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Backward Facing Step</h1>
+                <h1>Elements of Functional Analysis</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-2-and-sobolev-spaces">
+   <span class="math notranslate nohighlight">
+    \(L^2\)
+   </span>
+   and Sobolev spaces
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -368,17 +394,34 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="backward-facing-step">
-<h1>Backward Facing Step<a class="headerlink" href="#backward-facing-step" title="Permalink to this heading">#</a></h1>
-<p>Whether you write your book’s content in Jupyter Notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) or
-in regular markdown files (<code class="docutils literal notranslate"><span class="pre">.md</span></code>), you’ll write in the same flavor of markdown
-called <strong>MyST Markdown</strong>.
-This is a simple file to help you get started and show off some syntax.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e903e0dc-7254-4352-b751-acad3e0d31f0">
-<span class="eqno">(10)<a class="headerlink" href="#equation-e903e0dc-7254-4352-b751-acad3e0d31f0" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\Delta u = 0
+  <div class="tex2jax_ignore mathjax_ignore section" id="elements-of-functional-analysis">
+<h1>Elements of Functional Analysis<a class="headerlink" href="#elements-of-functional-analysis" title="Permalink to this headline">#</a></h1>
+<p>This section collects basic knowledge of weak formulations and functional spaces to understand the math behind the finite element method <span id="id1">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">FGZ15</a>, <a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">Qua16</a>, <a class="reference internal" href="../biblio.html#id2" title="Sandro Salsa. Equazioni a derivate parziali. Springer Milan, iii edition, 2016. ISBN 978-88-470-5785-2.">Sal16</a>]</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\Omega\subset\mathbb{R}^{d}\)</span> with <span class="math notranslate nohighlight">\(d=2,3\)</span> and <span class="math notranslate nohighlight">\(\partial \Omega\)</span> its boundary.</p>
+<div class="section" id="l-2-and-sobolev-spaces">
+<h2><span class="math notranslate nohighlight">\(L^2\)</span> and Sobolev spaces<a class="headerlink" href="#l-2-and-sobolev-spaces" title="Permalink to this headline">#</a></h2>
+<div class="proof definition admonition" id="L2-def">
+<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(L^2(\Omega)\)</span> be an Hilbert space of square integrable functions, i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+u\in L^2(\Omega)\Longleftrightarrow \int_\Omega |u|^2\,d\Omega &lt;\infty
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(L^2\)</span> is an Hilbert space, an inner product and an induced norm can be endowed</p>
+<div class="math notranslate nohighlight">
+\[
+(u, \, v) = \int_\Omega u\cdot v\,d\Omega \qquad \qquad
+\|u\|_{L^2}^2 = \int_\Omega |u|^2\,d\Omega
+\]</div>
+</div>
+</div><p>The same space can be easily extended to vector quantities and complex functions (the conjugate is introduced).</p>
+<p>Let us introduced the notion of multi-index derivative  <span class="math notranslate nohighlight">\(D^{\bm{\alpha}}\)</span>: given <span class="math notranslate nohighlight">\(\bm{\alpha}\in\mathbb{N}^n\)</span> of order <span class="math notranslate nohighlight">\(p=\sum_{i=1}^n \alpha_i\)</span>, the multi-index derivative of a function is defined as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-298c99fe-ea64-41d5-8c50-d59b2e966161">
+<span class="eqno">(1)<a class="headerlink" href="#equation-298c99fe-ea64-41d5-8c50-d59b2e966161" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    D^{\bm{\alpha}}u = \frac{\partial^pu}{\partial x_1^{\alpha_1} \dots \partial x_n^{\alpha_n}},
 \end{equation}\]</div>
-<div class="toctree-wrapper compound">
+<p>in which <span class="math notranslate nohighlight">\(n\)</span> is usually 2 or 3 <span id="id2">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">FGZ15</a>]</span>.</p>
 </div>
 </div>
 
@@ -395,7 +438,7 @@ This is a simple file to help you get started and show off some syntax.</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./chapter2"
+            path: "./chapter1"
         },
         predefinedOutput: true
     }
@@ -409,17 +452,17 @@ This is a simple file to help you get started and show off some syntax.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Installation.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="InstallationNotes.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Installation notes</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="notebookExe.html" title="next page">
+    <a class='right-next' id="next-link" href="WeakFormulations.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Notebook Example</p>
+        <p class="prev-next-title">Weak Formulations</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
