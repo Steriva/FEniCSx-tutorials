@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Internal Channel Flow (2D)" href="../chapter2/channel2D.html" />
+    <link rel="next" title="Poisson" href="../chapter2/Poisson.html" />
     <link rel="prev" title="Elements of Functional Analysis" href="FunctionalAnalysis.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -139,13 +139,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Stokes Problem
+  Basic Tutorials
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter2/channel2D.html">
-   Internal Channel Flow (2D)
+  <a class="reference internal" href="../chapter2/Poisson.html">
+   Poisson
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -154,7 +154,48 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter2/Impl_channel.html">
+    <a class="reference internal" href="../chapter2/ImplementationPoisson.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Fluid Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/steadyStokes.html">
+   Steady Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/channel_stokes.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/unsteadyNS.html">
+   Unsteady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/channel_unsteadyNS.html">
      Implementation
     </a>
    </li>
@@ -401,8 +442,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="weak-formulations">
 <h1>Weak Formulations<a class="headerlink" href="#weak-formulations" title="Permalink to this headline">#</a></h1>
 <p>Let <span class="math notranslate nohighlight">\(\Omega\subset\mathbb{R}^{d}\)</span> with <span class="math notranslate nohighlight">\(d=2,3\)</span> and <span class="math notranslate nohighlight">\(\partial \Omega = \Gamma_D\cup\Gamma_N\)</span> its boundary, let us consider the following problem (in strong form):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e5474637-e32a-4b1f-915f-615470b74cf9">
-<span class="eqno">(3)<a class="headerlink" href="#equation-e5474637-e32a-4b1f-915f-615470b74cf9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-83c9314f-c55d-4f18-a581-0ca686d10447">
+<span class="eqno">(3)<a class="headerlink" href="#equation-83c9314f-c55d-4f18-a581-0ca686d10447" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         -\Delta u = f &amp; \mbox{in } \Omega\\
@@ -424,15 +465,15 @@ title="Print to PDF"
 \int_\Omega -\Delta u\,v \,d\Omega=\int_\Omega f\,v\,d\Omega\qquad v\in\mathcal{V}_0
 \]</div>
 <p>and by applying the integration by parts formula and the effect of the BCs</p>
-<div class="amsmath math notranslate nohighlight" id="equation-de90d06f-f07a-4a1c-a44d-b4fdc8c398e5">
-<span class="eqno">(4)<a class="headerlink" href="#equation-de90d06f-f07a-4a1c-a44d-b4fdc8c398e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-77bffe3c-81e1-4113-b93e-6c71d3263557">
+<span class="eqno">(4)<a class="headerlink" href="#equation-77bffe3c-81e1-4113-b93e-6c71d3263557" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nabla u\cdot \nabla v \,d\Omega=\int_\Omega f\,v\,d\Omega+\int_{\Gamma_N}g\,v\,d\sigma\qquad v\in\mathcal{V}_0
 \end{equation}\]</div>
 <div class="section" id="galerkin-approximation">
 <h2>Galerkin approximation<a class="headerlink" href="#galerkin-approximation" title="Permalink to this headline">#</a></h2>
 <p>Let us introduce a computational grid <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span> (dim<span class="math notranslate nohighlight">\(\mathcal{T}_h = \mathcal{N}_h\)</span>) of the domain <span class="math notranslate nohighlight">\(\Omega\)</span> and the finite dimensional spaces <span class="math notranslate nohighlight">\(\mathcal{V}_h\subset\mathcal{V}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{V}_{h,0}\subset\mathcal{V}_0\)</span>. The Galerkin approximation <span id="id1">[<a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">2</a>, <a class="reference internal" href="../biblio.html#id4" title="Alfio Quarteroni, Riccardo Sacco, and Fausto Saleri. Numerical Mathematics. Springer, Berlin, Heidelberg, ii edition, 2007. ISBN 978-3-540-49809-4.">3</a>]</span> reads: *find <span class="math notranslate nohighlight">\(u_h\in\mathcal{V}_h\)</span> s.t.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2bd010f4-0f85-491c-b088-31cebd336605">
-<span class="eqno">(5)<a class="headerlink" href="#equation-2bd010f4-0f85-491c-b088-31cebd336605" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e87cb18a-6255-412c-944f-a6085f03f707">
+<span class="eqno">(5)<a class="headerlink" href="#equation-e87cb18a-6255-412c-944f-a6085f03f707" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nabla u_h\cdot \nabla v_h \,d\Omega=\int_\Omega f_h\,v_h\,d\Omega+\int_{\Gamma_N}g\,v_h\,d\sigma\qquad v_h\in\mathcal{V}_{h,0}
 \end{equation}\]</div>
 </div>
@@ -452,8 +493,8 @@ u_h(\mathbf{x}) = \sum_{j=1}^{\mathcal{N}_h}\alpha_j \phi_j(\mathbf{x})
 <img alt="hatFun" src="../_images/hatFunction.png" /></p>
 </div>
 </div><p>By taking <span class="math notranslate nohighlight">\(v_h=\phi_k\)</span> as the test function, the Galerkin problem reduces to</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2bdfe3fb-ad5d-4f94-85c2-00b6f60d314a">
-<span class="eqno">(6)<a class="headerlink" href="#equation-2bdfe3fb-ad5d-4f94-85c2-00b6f60d314a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f085fca4-d164-41b1-ae45-f6203216aed5">
+<span class="eqno">(6)<a class="headerlink" href="#equation-f085fca4-d164-41b1-ae45-f6203216aed5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nabla u_h\cdot \nabla \phi_k \,d\Omega=\int_\Omega f_h\,\phi_k\,d\Omega+\int_{\Gamma_N}g\,\phi_k\,d\sigma\qquad j = 1, \dots, \mathcal{N}_h
 \end{equation}\]</div>
 <p>then, the linear expansion can be introduced into the problem which results (in index notation)</p>
@@ -462,8 +503,8 @@ u_h(\mathbf{x}) = \sum_{j=1}^{\mathcal{N}_h}\alpha_j \phi_j(\mathbf{x})
 \alpha_j \int_\Omega \nabla \phi_j\cdot \nabla \phi_k \,d\Omega=\int_\Omega f_h\,\phi_k\,d\Omega+\int_{\Gamma_N}g\,\phi_k\,d\sigma
 \]</div>
 <p>By defining the matrix <span class="math notranslate nohighlight">\(A_{kj} = \displaystyle\int_\Omega \nabla \phi_j\cdot \nabla \phi_k \,d\Omega\)</span> and the vectors <span class="math notranslate nohighlight">\(f_k =  \displaystyle\int_\Omega f_h\,\phi_k\,d\Omega\)</span> and <span class="math notranslate nohighlight">\(g_k =  \displaystyle\int_{\Gamma_N}g\,\phi_k\,d\sigma\)</span>, the problem into the following linear system in the unknowns <span class="math notranslate nohighlight">\(\alpha_j\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-999b0843-1131-497d-a27c-5cfd66c2a4d3">
-<span class="eqno">(7)<a class="headerlink" href="#equation-999b0843-1131-497d-a27c-5cfd66c2a4d3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-57446791-c9cc-4f92-8bb3-9d15ded20864">
+<span class="eqno">(7)<a class="headerlink" href="#equation-57446791-c9cc-4f92-8bb3-9d15ded20864" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_{kj}\alpha_j = f_k + g_k\qquad j = 1, \dots, \mathcal{N}_h
 \end{equation}\]</div>
 </div>
@@ -503,10 +544,10 @@ A_{kj}\alpha_j = f_k + g_k\qquad j = 1, \dots, \mathcal{N}_h
             <p class="prev-next-title">Elements of Functional Analysis</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../chapter2/channel2D.html" title="next page">
+    <a class='right-next' id="next-link" href="../chapter2/Poisson.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Internal Channel Flow (2D)</p>
+        <p class="prev-next-title">Poisson</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

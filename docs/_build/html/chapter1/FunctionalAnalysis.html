@@ -139,13 +139,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Stokes Problem
+  Basic Tutorials
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../chapter2/channel2D.html">
-   Internal Channel Flow (2D)
+  <a class="reference internal" href="../chapter2/Poisson.html">
+   Poisson
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -154,7 +154,48 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../chapter2/Impl_channel.html">
+    <a class="reference internal" href="../chapter2/ImplementationPoisson.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Fluid Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/steadyStokes.html">
+   Steady Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/channel_stokes.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/unsteadyNS.html">
+   Unsteady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/channel_unsteadyNS.html">
      Implementation
     </a>
    </li>
@@ -406,7 +447,7 @@ title="Print to PDF"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="elements-of-functional-analysis">
 <h1>Elements of Functional Analysis<a class="headerlink" href="#elements-of-functional-analysis" title="Permalink to this headline">#</a></h1>
-<p>This section collects basic knowledge of weak formulations and functional spaces to understand the math behind the finite element method <span id="id1">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">1</a>, <a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">2</a>, <a class="reference internal" href="../biblio.html#id2" title="Sandro Salsa. Equazioni a derivate parziali. Springer Milan, iii edition, 2016. ISBN 978-88-470-5785-2.">3</a>]</span>.</p>
+<p>This section collects basic knowledge of weak formulations and functional spaces to understand the math behind the finite element method <span id="id1">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">1</a>, <a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">2</a>, <a class="reference internal" href="../biblio.html#id2" title="Sandro Salsa. Equazioni a derivate parziali. Springer Milan, iii edition, 2016. ISBN 978-88-470-5785-2.">4</a>]</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\Omega\subset\mathbb{R}^{d}\)</span> with <span class="math notranslate nohighlight">\(d=2,3\)</span> and <span class="math notranslate nohighlight">\(\partial \Omega\)</span> its boundary.</p>
 <div class="section" id="l-2-and-sobolev-spaces">
 <h2><span class="math notranslate nohighlight">\(L^2\)</span> and Sobolev spaces<a class="headerlink" href="#l-2-and-sobolev-spaces" title="Permalink to this headline">#</a></h2>
@@ -427,8 +468,8 @@ u\in L^2(\Omega)\Longleftrightarrow \int_\Omega |u|^2\,d\Omega &lt;\infty
 </div>
 </div><p>The same space can be easily extended to vector quantities and complex functions (the conjugate is introduced).</p>
 <p>Let us introduced the notion of multi-index derivative  <span class="math notranslate nohighlight">\(D^{{\alpha}}\)</span>: given <span class="math notranslate nohighlight">\({\alpha}\in\mathbb{N}^d\)</span> of order <span class="math notranslate nohighlight">\(p=\sum_{i=1}^d \alpha_i\)</span>, the multi-index derivative of a function is defined as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d1f238dc-d057-4f2a-b4cb-89fe2557845a">
-<span class="eqno">(1)<a class="headerlink" href="#equation-d1f238dc-d057-4f2a-b4cb-89fe2557845a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e3e866eb-2451-4195-96aa-4098c86aff05">
+<span class="eqno">(1)<a class="headerlink" href="#equation-e3e866eb-2451-4195-96aa-4098c86aff05" title="Permalink to this equation">#</a></span>\[\begin{equation}
     D^{{\alpha}}u = \frac{\partial^pu}{\partial x_1^{\alpha_1} \dots \partial x_d^{\alpha_d}},
 \end{equation}\]</div>
 <p>in which <span class="math notranslate nohighlight">\(d\)</span> is usually 2 or 3 <span id="id2">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">1</a>]</span>.</p>
@@ -455,8 +496,8 @@ u\in L^2(\Omega)\Longleftrightarrow \int_\Omega |u|^2\,d\Omega &lt;\infty
 \]</div>
 </div>
 </div><p>From this theorem, the following formulas can be derived</p>
-<div class="amsmath math notranslate nohighlight" id="equation-67a2a278-994b-456e-9539-4759bb42cbbc">
-<span class="eqno">(2)<a class="headerlink" href="#equation-67a2a278-994b-456e-9539-4759bb42cbbc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-44ddcaca-744a-4f9a-9da1-d87928659602">
+<span class="eqno">(2)<a class="headerlink" href="#equation-44ddcaca-744a-4f9a-9da1-d87928659602" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega (\nabla \cdot \mathbf{u}) \,p\,d\Omega = 
 - \int_\Omega \mathbf{u} \cdot \nabla p\,d\Omega + \int_{\partial\Omega}(\mathbf{u}\cdot \mathbf{n})\,p\,d\sigma
 \end{equation}\]</div>

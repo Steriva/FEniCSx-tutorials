@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Implementation" href="chapter2/Impl_channel.html" />
+    <link rel="prev" title="Implementation" href="chapter3/channel_unsteadyNS.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -136,13 +136,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Stokes Problem
+  Basic Tutorials
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="chapter2/channel2D.html">
-   Internal Channel Flow (2D)
+  <a class="reference internal" href="chapter2/Poisson.html">
+   Poisson
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -151,7 +151,48 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="chapter2/Impl_channel.html">
+    <a class="reference internal" href="chapter2/ImplementationPoisson.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Fluid Dynamics
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="chapter3/steadyStokes.html">
+   Steady Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapter3/channel_stokes.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="chapter3/unsteadyNS.html">
+   Unsteady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="chapter3/channel_unsteadyNS.html">
      Implementation
     </a>
    </li>
@@ -358,10 +399,13 @@ title="Print to PDF"
 <dt class="label" id="id3"><span class="brackets">2</span></dt>
 <dd><p>Alfio Quarteroni. <em>Numerical Models for Differential Problems</em>. Springer, Cham, iii edition, 2016.</p>
 </dd>
-<dt class="label" id="id2"><span class="brackets">3</span></dt>
+<dt class="label" id="id4"><span class="brackets">3</span></dt>
+<dd><p>Alfio Quarteroni, Riccardo Sacco, and Fausto Saleri. <em>Numerical Mathematics</em>. Springer, Berlin, Heidelberg, ii edition, 2007. ISBN 978-3-540-49809-4.</p>
+</dd>
+<dt class="label" id="id2"><span class="brackets">4</span></dt>
 <dd><p>Sandro Salsa. <em>Equazioni a derivate parziali</em>. Springer Milan, iii edition, 2016. ISBN 978-88-470-5785-2.</p>
 </dd>
-<dt class="label" id="id9"><span class="brackets">4</span></dt>
+<dt class="label" id="id9"><span class="brackets">5</span></dt>
 <dd><p>Ballarin, F. FEM on Colab. 2021. https://fem-on-colab.github.io.</p>
 </dd>
 </dl>
@@ -395,7 +439,7 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="chapter2/Impl_channel.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="chapter3/channel_unsteadyNS.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
