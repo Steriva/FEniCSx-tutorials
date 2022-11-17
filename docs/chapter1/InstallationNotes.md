@@ -1,4 +1,4 @@
-# ISF algorithm
+# Installation notes
 
 Let $\Omega$ be the spatial domain, $\partial \Omega$ its boundary, usually composed by three different components $\Gamma_{in}\cup \Gamma_w\cup \Gamma_o$ and let $\mathcal{T} = [0, T]$ be the time interval considered. Given an initial condition $\Psi^0$, the {Schrodinger equation} with the incompressibility constraint, can be solved with a first order time splitting method
 

@@ -5,20 +5,16 @@ format: jb-book
 root: intro
 
 parts:
-  - caption: Theory
+  - caption: General Overview of Finite Elements
     chapters:
-      - file: chapter1/MadelungTransformation
-      - file: chapter1/ISFalgo
-        sections:
-        - file: chapter1/WeakFormulations.ipynb
+      - file: chapter1/InstallationNotes
+      - file: chapter1/WeakFormulations
 
-  - caption: ISF Tutorials
+  - caption: Stokes Problem
     chapters: 
-      - file: chapter2/Installation
-      - file: chapter2/BFS      
+      - file: chapter2/channel2D
         sections:
-        - file: chapter2/notebookExe.ipynb
-        - file: chapter2/Implementation.ipynb
+        - file: chapter2/Impl_channel.ipynb
   - caption: Appendix
     chapters:
       - file: biblio
