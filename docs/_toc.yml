@@ -1,0 +1,24 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+
+parts:
+  - caption: Theory
+    chapters:
+      - file: chapter1/MadelungTransformation
+      - file: chapter1/ISFalgo
+        sections:
+        - file: chapter1/WeakFormulations.ipynb
+
+  - caption: ISF Tutorials
+    chapters: 
+      - file: chapter2/Installation
+      - file: chapter2/BFS      
+        sections:
+        - file: chapter2/notebookExe.ipynb
+        - file: chapter2/Implementation.ipynb
+  - caption: Appendix
+    chapters:
+      - file: biblio
