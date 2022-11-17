@@ -14,7 +14,7 @@ The main property to remember is that repeated indeces substitues summations
 $$ 
 \sum_i u_iv_i = u_i v_i
 $$
-Vectors as $\mathbf{a}$ are indicated with $a_i$, matrices $A$ with $A_{ij}. 
+Vectors as $\mathbf{a}$ are indicated with $a_i$, matrices $A$ with $A_{ij}$. 
 
 Here are some differential operators:
 
