@@ -1,10 +1,13 @@
 # Steady Stokes
 
-Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
-in regular markdown files (`.md`), you'll write in the same flavor of markdown
-called **MyST Markdown**.
-This is a simple file to help you get started and show off some syntax.
-
+The Stokes equations describes the flows of incompressible viscous fluid when the importance of inertia is low with respect to viscous forces
 \begin{equation}
-\Delta u = 0
+\left\{
+    \begin{array}{ll}
+        \nu\Delta \mathbf{u}-\nabla p = 0 & \mbox{in }\Omega\\
+        \nabla\cdot \mathbf{u} = 0 & \mbox{in }\Omega\\
+        \mathbf{u}=\mathbf{u}_D & \mbox{on }\Gamma_D\\
+        \nu\frac{\partial \mathbf{u}}{\partial \mathbf{n}}-p\mathbf{n}=g\mathbf{n} & \mbox{on }\Gamma_N
+    \end{array}
+\right.
 \end{equation}
