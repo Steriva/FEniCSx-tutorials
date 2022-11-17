@@ -1,4 +1,4 @@
-# Internal Channel Flow (2D)
+# Unsteady Navier-Stokes
 
 Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
 in regular markdown files (`.md`), you'll write in the same flavor of markdown
