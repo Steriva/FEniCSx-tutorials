@@ -357,6 +357,11 @@ title="Print to PDF"
    and Sobolev spaces
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-formulas">
+   Useful formulas
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -384,6 +389,11 @@ title="Print to PDF"
    and Sobolev spaces
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#useful-formulas">
+   Useful formulas
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -396,7 +406,7 @@ title="Print to PDF"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="elements-of-functional-analysis">
 <h1>Elements of Functional Analysis<a class="headerlink" href="#elements-of-functional-analysis" title="Permalink to this headline">#</a></h1>
-<p>This section collects basic knowledge of weak formulations and functional spaces to understand the math behind the finite element method <span id="id1">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">FGZ15</a>, <a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">Qua16</a>, <a class="reference internal" href="../biblio.html#id2" title="Sandro Salsa. Equazioni a derivate parziali. Springer Milan, iii edition, 2016. ISBN 978-88-470-5785-2.">Sal16</a>]</span>.</p>
+<p>This section collects basic knowledge of weak formulations and functional spaces to understand the math behind the finite element method <span id="id1">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">1</a>, <a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">2</a>, <a class="reference internal" href="../biblio.html#id2" title="Sandro Salsa. Equazioni a derivate parziali. Springer Milan, iii edition, 2016. ISBN 978-88-470-5785-2.">3</a>]</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\Omega\subset\mathbb{R}^{d}\)</span> with <span class="math notranslate nohighlight">\(d=2,3\)</span> and <span class="math notranslate nohighlight">\(\partial \Omega\)</span> its boundary.</p>
 <div class="section" id="l-2-and-sobolev-spaces">
 <h2><span class="math notranslate nohighlight">\(L^2\)</span> and Sobolev spaces<a class="headerlink" href="#l-2-and-sobolev-spaces" title="Permalink to this headline">#</a></h2>
@@ -416,12 +426,56 @@ u\in L^2(\Omega)\Longleftrightarrow \int_\Omega |u|^2\,d\Omega &lt;\infty
 \]</div>
 </div>
 </div><p>The same space can be easily extended to vector quantities and complex functions (the conjugate is introduced).</p>
-<p>Let us introduced the notion of multi-index derivative  <span class="math notranslate nohighlight">\(D^{\bm{\alpha}}\)</span>: given <span class="math notranslate nohighlight">\(\bm{\alpha}\in\mathbb{N}^n\)</span> of order <span class="math notranslate nohighlight">\(p=\sum_{i=1}^n \alpha_i\)</span>, the multi-index derivative of a function is defined as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-298c99fe-ea64-41d5-8c50-d59b2e966161">
-<span class="eqno">(1)<a class="headerlink" href="#equation-298c99fe-ea64-41d5-8c50-d59b2e966161" title="Permalink to this equation">#</a></span>\[\begin{equation}
-    D^{\bm{\alpha}}u = \frac{\partial^pu}{\partial x_1^{\alpha_1} \dots \partial x_n^{\alpha_n}},
+<p>Let us introduced the notion of multi-index derivative  <span class="math notranslate nohighlight">\(D^{{\alpha}}\)</span>: given <span class="math notranslate nohighlight">\({\alpha}\in\mathbb{N}^d\)</span> of order <span class="math notranslate nohighlight">\(p=\sum_{i=1}^d \alpha_i\)</span>, the multi-index derivative of a function is defined as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d1f238dc-d057-4f2a-b4cb-89fe2557845a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-d1f238dc-d057-4f2a-b4cb-89fe2557845a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    D^{{\alpha}}u = \frac{\partial^pu}{\partial x_1^{\alpha_1} \dots \partial x_d^{\alpha_d}},
 \end{equation}\]</div>
-<p>in which <span class="math notranslate nohighlight">\(n\)</span> is usually 2 or 3 <span id="id2">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">FGZ15</a>]</span>.</p>
+<p>in which <span class="math notranslate nohighlight">\(d\)</span> is usually 2 or 3 <span id="id2">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">1</a>]</span>.</p>
+<div class="proof definition admonition" id="Hp-def">
+<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
+<div class="definition-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathcal{H}^p(\Omega)\)</span> be the Sobolev space of order <span class="math notranslate nohighlight">\(p\)</span>, i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{H}^p(\Omega) = \left\{u\in L^2(\Omega)\,:\,\int_\Omega \left|D^{{\alpha}}u\right|^2\,d\Omega &lt;\infty \right\}
+\]</div>
+</div>
+</div><p>All these derivatives are meant to be in the weak/distribution sense <span id="id3">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">1</a>]</span>.</p>
+</div>
+<div class="section" id="useful-formulas">
+<h2>Useful formulas<a class="headerlink" href="#useful-formulas" title="Permalink to this headline">#</a></h2>
+<div class="proof theorem admonition" id="Gauss-theo">
+<p class="admonition-title"><span class="caption-number">Theorem 1 </span></p>
+<div class="theorem-content section" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\mathbf{u}\in[\mathcal{H}^1(\Omega)]^d\)</span> a vector function, the Gauss (divergence) theorem states:</p>
+<div class="math notranslate nohighlight">
+\[
+\int_\Omega \nabla \cdot \mathbf{u}\,d\Omega = \int_{\partial\Omega}\mathbf{u}\cdot \mathbf{n}\,d\sigma
+\]</div>
+</div>
+</div><p>From this theorem, the following formulas can be derived</p>
+<div class="amsmath math notranslate nohighlight" id="equation-67a2a278-994b-456e-9539-4759bb42cbbc">
+<span class="eqno">(2)<a class="headerlink" href="#equation-67a2a278-994b-456e-9539-4759bb42cbbc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_\Omega (\nabla \cdot \mathbf{u}) \,p\,d\Omega = 
+- \int_\Omega \mathbf{u} \cdot \nabla p\,d\Omega + \int_{\partial\Omega}(\mathbf{u}\cdot \mathbf{n})\,p\,d\sigma
+\end{equation}\]</div>
+<p>given <span class="math notranslate nohighlight">\(p\in\mathcal{H}^1(\Omega)\)</span>.</p>
+<div class="proof admonition" id="proof">
+<p>Proof. Recalling that (using index/Einstein notation)</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial x_i}\left(u_i\,p\right) = 
+\frac{\partial\mathbf{u}_i}{\partial x_i} \,p + u_i \frac{\partial p}{\partial x_i}
+\]</div>
+<p>we can rewrite the formula as</p>
+<div class="math notranslate nohighlight">
+\[
+\int_\Omega \left[(\nabla \cdot \mathbf{u}) \,p + \mathbf{u} \cdot \nabla p\right] \,d\Omega = 
+\int_\Omega \nabla \cdot (p\mathbf{u})\,d\Omega = \int_{\partial\Omega}(\mathbf{u}\cdot \mathbf{n})\,p\,d\sigma
+\]</div>
+<p>which is <a class="reference internal" href="#Gauss-theo">Gauss theorem</a>.</p>
+</div>
 </div>
 </div>
 
