@@ -1,4 +1,6 @@
 # Bibliography
 
 ```{bibliography}
+:style: plain
+
 ```

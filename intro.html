@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation notes" href="chapter1/InstallationNotes.html" />
@@ -352,8 +354,27 @@ title="Print to PDF"
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
 <p>This book collects some basic theory and tutorials for the Finite Element library <a class="reference external" href="https://fenicsproject.org">FEniCSx</a>.</p>
 <p>The book is organised in different chapters, according to the different physical problem analysed. Typically, the weak formulation is derived and the calculations are reported.</p>
-<p>Moreover, a detailed analysis of the implementation is presented, along with some installation notes for <a class="reference external" href="https://fenicsproject.org">FEniCSx</a> using <em>conda</em> on a computer (Linux or Mac) or the use in Google Colab <span id="id1">[<a class="reference internal" href="biblio.html#id9" title="Ballarin, F. FEM on Colab. 2021. https://fem-on-colab.github.io.">BallarinF21</a>]</span>.</p>
-<div class="toctree-wrapper compound">
+<p>Moreover, a detailed analysis of the implementation is presented, along with some installation notes for <a class="reference external" href="https://fenicsproject.org">FEniCSx</a> using <em>conda</em> on a computer (Linux or Mac) or the use in Google Colab <span id="id1">[<a class="reference internal" href="biblio.html#id9" title="Ballarin, F. FEM on Colab. 2021. https://fem-on-colab.github.io.">5</a>]</span>.</p>
+<p>In the book, the index notation is used which is briefly explained here</p>
+<div class="proof assumption admonition" id="assumption-0">
+<p class="admonition-title"><span class="caption-number">Assumption 1 </span></p>
+<div class="assumption-content section" id="proof-content">
+<p>The main property to remember is that repeated indeces substitues summations</p>
+<div class="math notranslate nohighlight">
+\[ 
+\sum_i u_iv_i = u_i v_i
+\]</div>
+<p>Vectors as <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> are indicated with <span class="math notranslate nohighlight">\(a_i\)</span>, matrices <span class="math notranslate nohighlight">\(A\)</span> with $A_{ij}.</p>
+<p>Here are some differential operators:</p>
+<div class="math notranslate nohighlight">
+\[ 
+\nabla u \longleftrightarrow \frac{\partial u}{\partial x_i}\qquad 
+\nabla \cdot \mathbf{u} \longleftrightarrow \frac{\partial u_i}{\partial x_i}\qquad 
+\Delta \cdot u \longleftrightarrow \frac{\partial u}{\partial x_i^2}\qquad
+\Delta \cdot \mathbf{u} \longleftrightarrow \frac{\partial u_j}{\partial x_i^2}
+\]</div>
+</div>
+</div><div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Overview of Finite Elements</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="chapter1/InstallationNotes.html">Installation notes</a></li>
