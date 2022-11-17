@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -33,7 +34,6 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation notes" href="chapter1/InstallationNotes.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
@@ -121,6 +121,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="chapter1/InstallationNotes.html">
    Installation notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chapter1/FunctionalAnalysis.html">
+   Elements of Functional Analysis
   </a>
  </li>
  <li class="toctree-l1">
@@ -344,14 +349,15 @@ title="Print to PDF"
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h1>
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
 <p>This book collects some basic theory and tutorials for the Finite Element library <a class="reference external" href="https://fenicsproject.org">FEniCSx</a>.</p>
 <p>The book is organised in different chapters, according to the different physical problem analysed. Typically, the weak formulation is derived and the calculations are reported.</p>
-<p>Moreover, a detailed analysis of the implementation is presented, along with some installation notes for <a class="reference external" href="https://fenicsproject.org">FEniCSx</a> using <em>conda</em> on a computer (Linux or Mac) or the use in Google Colab <span id="id1">[<a class="reference internal" href="biblio.html#id26" title="Ballarin, F. FEM on Colab. 2021. https://fem-on-colab.github.io.">BallarinF21</a>]</span>.</p>
+<p>Moreover, a detailed analysis of the implementation is presented, along with some installation notes for <a class="reference external" href="https://fenicsproject.org">FEniCSx</a> using <em>conda</em> on a computer (Linux or Mac) or the use in Google Colab <span id="id1">[<a class="reference internal" href="biblio.html#id9" title="Ballarin, F. FEM on Colab. 2021. https://fem-on-colab.github.io.">BallarinF21</a>]</span>.</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Overview of Finite Elements</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="chapter1/InstallationNotes.html">Installation notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter1/FunctionalAnalysis.html">Elements of Functional Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter1/WeakFormulations.html">Weak Formulations</a></li>
 </ul>
 </div>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -33,7 +34,6 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -55,9 +55,9 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Internal Channel Flow (2D)" href="../chapter2/channel2D.html" />
-    <link rel="prev" title="Installation notes" href="InstallationNotes.html" />
+    <link rel="prev" title="Elements of Functional Analysis" href="FunctionalAnalysis.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
+    <meta name="docsearch:language" content="None">
     
 
     <!-- Google Analytics -->
@@ -124,6 +124,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="InstallationNotes.html">
    Installation notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="FunctionalAnalysis.html">
+   Elements of Functional Analysis
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -322,12 +327,39 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-2-and-sobolev-spaces">
+   <span class="math notranslate nohighlight">
+    \(L^2\)
+   </span>
+   and Sobolev spaces
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -339,6 +371,22 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#l-2-and-sobolev-spaces">
+   <span class="math notranslate nohighlight">
+    \(L^2\)
+   </span>
+   and Sobolev spaces
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -347,46 +395,12 @@ title="Print to PDF"
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="weak-formulations">
-<h1>Weak Formulations<a class="headerlink" href="#weak-formulations" title="Permalink to this heading">#</a></h1>
-<p>The <em>Incompressible Schrodinger Flow</em> is a novel numerical technique, developed in <span id="id1">[<a class="reference internal" href="../biblio.html#id11" title="Albert Chern, Felix Knöppel, Ulrich Pinkall, Peter Schröder, and Steffen Weißmann. Schrödinger's smoke. ACM Trans. Graph., 7 2016. URL: https://doi.org/10.1145/2897824.2925868, doi:10.1145/2897824.2925868.">CKP+16</a>]</span> and <span id="id2">[<a class="reference internal" href="../biblio.html#id10" title="Albert Chern. Fluid Dynamics with Incompressible Schroedinger Flow. PhD thesis, California Institute of Technology, 2017. doi:10.7907/Z98050N3.">Che17</a>]</span>, able to describe inviscid fluids behaviour using the Schrodinger equation. This section gives some basic concepts on the analogy between hydrodynamics and quantum mechanics <span id="id3">[<a class="reference internal" href="../biblio.html#id7" title="E Madelung. Eine anschauliche deutung der gleichung von schrödinger. Naturwissenschaften, 14:1004, 1926. URL: https://doi.org/10.1007/BF01504657, doi:10.1007/BF01504657.">Mad26</a>]</span>, onto which ISF is based, along with the description of the solution algorithm.</p>
-<p>The Schrodinger equation is able to describe the time evolution of this physical state, subjected to a certain potential field <span class="math notranslate nohighlight">\(p\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-b4c91872-b8b7-49e8-b4dd-e86dd3f94872">
-<span class="eqno">(5)<a class="headerlink" href="#equation-b4c91872-b8b7-49e8-b4dd-e86dd3f94872" title="Permalink to this equation">#</a></span>\[\begin{equation}
-    i\hbar \frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2}\Delta \psi + p \psi.
-\end{equation}\]</div>
-<p>This PDE is composed by linear operators for the wave function and it can be classified as parabolic. In the context of ISF, the wave function is used to describe inviscid flows, the probabilistic interpretation of the quantum mechanics is no more used, instead the ISF is set in the analogy between hydrodynamics and quantum mechanics.</p>
-<p>This PDE is composed by linear operators for the wave function and it can be classified as parabolic. In the context of ISF, the wave function is used to describe inviscid flows, the probabilistic interpretation of the quantum mechanics is no more used, instead the ISF is set in the analogy between hydrodynamics and quantum mechanics, proposed by Madelung in 1926. The state of the system can be described by a 2 components wave function, i.e. <span class="math notranslate nohighlight">\(\Psi=[\psi_1,\psi_2]^T\in\mathbb{C}^2\)</span>, which is the solution of the following Schrodinger equation, i.e.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-671a6b7b-68ea-4604-bd58-f74e62196751">
-<span class="eqno">(6)<a class="headerlink" href="#equation-671a6b7b-68ea-4604-bd58-f74e62196751" title="Permalink to this equation">#</a></span>\[\begin{equation}
-    i\hbar\frac{\partial\Psi}{\partial t} =- \frac{\hbar^2}{2}\Delta \Psi+p\Psi\longleftrightarrow
-    i\hbar\frac{\partial}{\partial t}\left[\begin{array}{cc} \psi_1 \\ \psi_2\end{array}\right] = -\frac{\hbar^2}{2}\Delta \left[\begin{array}{cc} \psi_1 \\ \psi_2\end{array}\right]+p\left[\begin{array}{cc} \psi_1 \\ \psi_2\end{array}\right].
-\end{equation}\]</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If the flow field is described by a single wave function wave function <span class="math notranslate nohighlight">\(\psi\in\mathbb{C}\)</span>, the associated velocity field is always characterised by a null vorticity, which is not generally true</p>
+<h1>Weak Formulations<a class="headerlink" href="#weak-formulations" title="Permalink to this headline">#</a></h1>
+<p>eak formulations and functional spaces to understand the math behind the finite element method <span id="id1">[<a class="reference internal" href="../biblio.html#id7" title="A. Ferrero, F. Gazzola, and M. Zanotti. Elements of Advanced Mathematical Analysis for Physics and Engineering. Società Editrice Esculapio, iii edition, 2015. ISBN 9788874888955.">FGZ15</a>, <a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">Qua16</a>, <a class="reference internal" href="../biblio.html#id2" title="Sandro Salsa. Equazioni a derivate parziali. Springer Milan, iii edition, 2016. ISBN 978-88-470-5785-2.">Sal16</a>]</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(\Omega\subset\mathbb{R}^{d}\)</span> with <span class="math notranslate nohighlight">\(d=2,3\)</span> and <span class="math notranslate nohighlight">\(\partial \Omega\)</span> its boundary.</p>
+<div class="section" id="l-2-and-sobolev-spaces">
+<h2><span class="math notranslate nohighlight">\(L^2\)</span> and Sobolev spaces<a class="headerlink" href="#l-2-and-sobolev-spaces" title="Permalink to this headline">#</a></h2>
 </div>
-<p>It can be shown that the real and the imaginary part of this equation are linked to the continuity and momentum equation of the incompressible Euler equations</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e99c9ae9-ad97-4f31-84ae-98f2f8ca12d0">
-<span class="eqno">(7)<a class="headerlink" href="#equation-e99c9ae9-ad97-4f31-84ae-98f2f8ca12d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
-    \left\{
-    \begin{array}{l}
-        \nabla\cdot \vec{u} = 0 \\
-        \displaystyle\frac{\partial\vec{u}}{\partial t}+\left(\vec{u}\cdot \nabla\right)\vec{u} = -\nabla p
-    \end{array}
-    \right.
-\end{equation}\]</div>
-<p>This translation is known as the Madelung transformation, in particular for <span class="math notranslate nohighlight">\(2-\)</span>component wave function the velocity can be computed as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4b0175cf-abaf-480b-be8c-543b6c661438">
-<span class="eqno">(8)<a class="headerlink" href="#equation-4b0175cf-abaf-480b-be8c-543b6c661438" title="Permalink to this equation">#</a></span>\[\begin{equation}
-    \vec{u} = \hbar\mbox{Re}\left\{-\left(\Psi^T\right)^*i\,\nabla\Psi\right\}.
-\end{equation}\]</div>
-<p>The viscosity, thus the dissipation, is not considered and the only existing external force is given by the potential <span class="math notranslate nohighlight">\(-\nabla p\)</span>. The spatial operators on the wave function <span class="math notranslate nohighlight">\(\Psi\)</span>, i.e. <span class="math notranslate nohighlight">\(-\frac{\hbar^2}{2}\Delta\)</span> and <span class="math notranslate nohighlight">\(p\)</span>, have a physical interpretation in the Euler equations on <span class="math notranslate nohighlight">\(\vec{u}\)</span>, i.e. the advection <span class="math notranslate nohighlight">\(\left(\vec{u}\cdot \nabla\right)\vec{u}\)</span> and the potential forces <span class="math notranslate nohighlight">\(-\nabla p\)</span>.</p>
-<p>In the end, the incompressibility constraint <span class="math notranslate nohighlight">\(\nabla \cdot \vec{u}=0\)</span> can be equivalently imposed to the wave function as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2dec473d-ee70-4f9a-a1d1-7d3bc8f3c854">
-<span class="eqno">(9)<a class="headerlink" href="#equation-2dec473d-ee70-4f9a-a1d1-7d3bc8f3c854" title="Permalink to this equation">#</a></span>\[\begin{equation}
-    \mbox{Re}\left\{\left(\Psi^T\right)^*i\,\Delta\Psi\right\} = 0.
-    \label{eqn:SchrodingerIncCoinstraint}
-\end{equation}\]</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -416,11 +430,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="InstallationNotes.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="FunctionalAnalysis.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Installation notes</p>
+            <p class="prev-next-title">Elements of Functional Analysis</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../chapter2/channel2D.html" title="next page">
