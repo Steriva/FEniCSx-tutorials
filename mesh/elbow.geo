@@ -1,6 +1,6 @@
 L = 1.5;
 R = 1;
-lc = 0.05;
+lc = 0.036;
 ri = 0.5;
 re = 1.5;
  
@@ -37,20 +37,26 @@ Line(5) = {8, 9};
 //+
 Line(6) = {9, 1};
 //+
-Circle(7) = {8, 10, 6};
+Point(11) = {2, 1, 0, lc};
 //+
-Circle(8) = {2, 10, 3};
+Point(12) = {3, 0, 0, lc};
 //+
-Physical Curve("inlet", 10) = {6};
+Line(7) = {2, 12};
 //+
-Physical Curve("walls", 20) = {4, 7, 5, 1, 8, 2};
+Line(8) = {12, 3};
 //+
-Physical Curve("outlet", 30) = {3};
+Line(9) = {8, 11};
 //+
-Curve Loop(1) = {5, 6, 1, 8, 2, 3, 4, -7};
+Line(10) = {11, 6};
+//+
+Curve Loop(1) = {5, 6, 1, 7, 8, 2, 3, 4, -10, -9};
 //+
 Plane Surface(1) = {1};
 //+
-Physical Surface("domain", 1) = {1};
+Physical Curve("inlet", 10) = {6};
 //+
-Transfinite Curve {6} = 50 Using Progression 1;
+Physical Curve("walls", 20) = {7, 1, 5, 9, 10, 4, 2, 8};
+//+
+Physical Curve("outlet", 30) = {3};
+//+
+Physical Surface("domain", 1) = {1};
