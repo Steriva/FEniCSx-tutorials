@@ -21,8 +21,8 @@ Here are some differential operators:
 $$ 
 \nabla u \longleftrightarrow \frac{\partial u}{\partial x_i}\qquad 
 \nabla \cdot \mathbf{u} \longleftrightarrow \frac{\partial u_i}{\partial x_i}\qquad 
-\Delta \cdot u \longleftrightarrow \frac{\partial u}{\partial x_i^2}\qquad
-\Delta \cdot \mathbf{u} \longleftrightarrow \frac{\partial u_j}{\partial x_i^2}
+\Delta  u \longleftrightarrow \frac{\partial u}{\partial x_i^2}\qquad
+\Delta  \mathbf{u} \longleftrightarrow \frac{\partial u_j}{\partial x_i^2}
 $$
 
 ```
