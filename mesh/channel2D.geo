@@ -7,7 +7,7 @@ fuel_or = 1.791 / scale;
 clad_ir = 1.800 / scale;
 clad_or = 1.880 / scale;
 
-R = 4.05 / 2 / scale; // pitch
+R = 4.36 / 2 / scale; // pitch
 
 // geometry: points
 
