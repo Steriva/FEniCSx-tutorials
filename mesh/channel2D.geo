@@ -7,7 +7,7 @@ fuel_or = 1.791 / scale;
 clad_ir = 1.800 / scale;
 clad_or = 1.880 / scale;
 
-R = 4.05 / scale; // pitch
+R = 4.05 / 2 / scale; // pitch
 
 // geometry: points
 
@@ -45,9 +45,9 @@ n = 10;
 //+
 Transfinite Curve {13, 6} = 12*n Using Progression 1;
 //+
-Transfinite Curve {7} = 3*n Using Progression 0.95;
+Transfinite Curve {7} = 2*n Using Progression 0.95;
 //+
-Transfinite Curve {5} = 3*n Using Progression 1/0.95;
+Transfinite Curve {5} = 2*n Using Progression 1/0.95;
 //+
 Transfinite Surface {1};
 //+
