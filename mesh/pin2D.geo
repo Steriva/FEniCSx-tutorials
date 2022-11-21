@@ -2,7 +2,7 @@ lc = 1.;
 
 scale = 1; // the geometry is made in cm
 
-L = 70 / scale;
+L = 38 / scale;
 
 fuel_or = 1.791 / scale;
 clad_ir = 1.800 / scale;

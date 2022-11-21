@@ -1,7 +1,7 @@
 lc = 1;
 scale = 1; // the geometry is made in cm
 
-L = 70 / scale;
+L = 38 / scale;
 
 fuel_or = 1.791 / scale;
 clad_ir = 1.800 / scale;
@@ -43,7 +43,7 @@ Physical Surface("domain", 1) = {1};
 
 n = 10;  
 //+
-Transfinite Curve {13, 6} = 12*n Using Progression 1;
+Transfinite Curve {13, 6} = 24*n Using Progression 1;
 //+
 Transfinite Curve {7} = 2*n Using Progression 0.95;
 //+
