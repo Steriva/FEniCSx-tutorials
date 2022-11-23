@@ -1,4 +1,4 @@
-lc = 0.16;
+lc = 0.1;
 
 scale = 1; // the geometry is made in cm
 
@@ -124,6 +124,7 @@ Curve Loop(8) = {13, -25, -12, 24};
 Plane Surface(8) = {8};
 
 // Physical Groups
+
 Physical Surface("fuel", 1) = {7};
 //+
 Physical Surface("helium", 2) = {6};
@@ -143,10 +144,10 @@ Physical Curve("centre", 30) = {5, 4, 3, 1, 2};
 Physical Curve("inlet", 40) = {14, 20, 22, 24};
 
 // Mesh
-//Recombine Surface {1, 2, 3, 4, 5, 6, 7, 8};
+Recombine Surface {1, 2, 3, 4, 5, 6, 7, 8};
 //+
-Transfinite Surface {8};
+Transfinite Surface {1,2,3,4,5,7,8};
 //+
-Transfinite Curve {24} = 15 Using Progression 1/0.925;
+Transfinite Curve {24} = 15 Using Progression 1/0.85;
 //+
-Transfinite Curve {25} = 15 Using Progression 0.925;
+Transfinite Curve {25} = 15 Using Progression 0.85;
