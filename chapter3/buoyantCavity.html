@@ -459,8 +459,8 @@ title="Print to PDF"
 <h1>Buoyant Cavity (2D)<a class="headerlink" href="#buoyant-cavity-2d" title="Permalink to this headline">#</a></h1>
 <p>This notebook implements a steady incompressible Navier-Stokes solver + energy equation for the buoyant cavity problem.</p>
 <p>The problem is strong form reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f1440a8-294a-44a6-b04e-30076db91f71">
-<span class="eqno">(23)<a class="headerlink" href="#equation-4f1440a8-294a-44a6-b04e-30076db91f71" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a6277d67-7d30-4db9-a56f-500ad30cd03a">
+<span class="eqno">(23)<a class="headerlink" href="#equation-a6277d67-7d30-4db9-a56f-500ad30cd03a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \nabla \cdot \mathbf{u} =0&amp; in\;\Omega\\
@@ -505,8 +505,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>The problem we want to face is non-linear, whose weak formulation reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6a3443df-2465-41d8-aad9-9bde36653236">
-<span class="eqno">(24)<a class="headerlink" href="#equation-6a3443df-2465-41d8-aad9-9bde36653236" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-214b9f16-e65b-4b28-aa0e-4954db6486d7">
+<span class="eqno">(24)<a class="headerlink" href="#equation-214b9f16-e65b-4b28-aa0e-4954db6486d7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega - \beta\int_\Omega(T-T_{ref})\mathbf{g}\cdot \mathbf{v}\,d\Omega + \int_\Omega \mathbf{u}\cdot \nabla T \, \phi\,d\Omega+\int_\Omega \alpha\nabla T \cdot \nabla\phi\,d\Omega=0
 \end{equation}\]</div>
 <div class="cell docutils container">

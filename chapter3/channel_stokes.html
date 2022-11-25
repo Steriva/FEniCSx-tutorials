@@ -505,8 +505,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="stokes-problem-channel-flow">
 <h1>Stokes problem - Channel Flow<a class="headerlink" href="#stokes-problem-channel-flow" title="Permalink to this headline">#</a></h1>
 <p>This notebook implements a block FE solution of the following problem</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5900af06-4707-48f3-a486-9a88adfdb177">
-<span class="eqno">(14)<a class="headerlink" href="#equation-5900af06-4707-48f3-a486-9a88adfdb177" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-58511884-bf68-4eda-9242-8900e4ce5f26">
+<span class="eqno">(14)<a class="headerlink" href="#equation-58511884-bf68-4eda-9242-8900e4ce5f26" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         -\mu\Delta \mathbf{u} + \nabla p =0 &amp; in \; \Omega\\
@@ -589,8 +589,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>Let us define the functional spaces</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a9ab2ffd-a6e9-4847-a108-1b2752c2d82c">
-<span class="eqno">(15)<a class="headerlink" href="#equation-a9ab2ffd-a6e9-4847-a108-1b2752c2d82c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1b4c5125-2c38-48e2-b43a-a17417558bed">
+<span class="eqno">(15)<a class="headerlink" href="#equation-1b4c5125-2c38-48e2-b43a-a17417558bed" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{split}
 \mathcal{V} &amp;= \left\{\mathbf{v}\in\left[\mathcal{H}^1(\Omega)\right]^2:\,
                                                                         \left.\mathbf{v}\right|_{\Gamma_{in}} = \mathbf{u}_{in}\;,\;
@@ -601,14 +601,14 @@ title="Print to PDF"
 \end{split}
 \end{equation}\]</div>
 <p>so that, the weak formulation reads</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fe3c5efd-6509-45a6-b3cc-a51bfb077b5b">
-<span class="eqno">(16)<a class="headerlink" href="#equation-fe3c5efd-6509-45a6-b3cc-a51bfb077b5b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a32f5334-9ba4-491a-899d-26aff4de065d">
+<span class="eqno">(16)<a class="headerlink" href="#equation-a32f5334-9ba4-491a-899d-26aff4de065d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega\mu\nabla\mathbf{u}\cdot\mathbf{v}\,d\Omega -\int_\Omega p \,\nabla\cdot \mathbf{v}\,d\Omega +
 \int_\Omega q \,\nabla\cdot \mathbf{u} = 0\qquad \forall \mathbf{v}\in\mathcal{V}_0, q\in\mathcal{Q}
 \end{equation}\]</div>
 <p>which results in the following saddle point system</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5c67dbd2-2ab4-44b4-8825-9d8400020e00">
-<span class="eqno">(17)<a class="headerlink" href="#equation-5c67dbd2-2ab4-44b4-8825-9d8400020e00" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0f5d65db-1a4a-4da6-8ea7-8a99f3afc62a">
+<span class="eqno">(17)<a class="headerlink" href="#equation-0f5d65db-1a4a-4da6-8ea7-8a99f3afc62a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left[
 \begin{array}{ll}
 A &amp; B^T \\
