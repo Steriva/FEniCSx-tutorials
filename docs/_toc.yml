@@ -24,7 +24,7 @@ parts:
         - file: chapter3/channel_stokes.ipynb
       - file: chapter3/steadyNS
         sections:
-        - file: chapter3/channel_steadyNS.ipynb
+        - file: chapter3/Cavity2D.ipynb
       - file: chapter3/unsteadyNS
         sections:
         - file: chapter3/channel_unsteadyNS.ipynb

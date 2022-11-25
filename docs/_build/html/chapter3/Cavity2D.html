@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buoyant Cavity (2D) &#8212; Tutorials for FEniCSx</title>
+    <title>Cavity (2D) &#8212; Tutorials for FEniCSx</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Bibliography" href="../biblio.html" />
-    <link rel="prev" title="Steady Navier-Stokes + energy equation (boussinesq)" href="steadyBoussinesq.html" />
+    <link rel="next" title="Unsteady Navier-Stokes" href="unsteadyNS.html" />
+    <link rel="prev" title="Steady Navier-Stokes" href="steadyNS.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -184,18 +184,18 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="steadyNS.html">
    Steady Navier-Stokes
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="Cavity2D.html">
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Cavity (2D)
     </a>
    </li>
@@ -218,18 +218,18 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="steadyBoussinesq.html">
    Steady Navier-Stokes + energy equation (boussinesq)
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="buoyantCavity.html">
      Buoyant Cavity (2D)
     </a>
    </li>
@@ -306,7 +306,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter3/buoyantCavity.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter3/Cavity2D.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -366,7 +366,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter3/buoyantCavity.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter3/Cavity2D.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -394,7 +394,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapter3/buoyantCavity.ipynb"
+        <a href="../_sources/chapter3/Cavity2D.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -443,7 +443,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Buoyant Cavity (2D)</h1>
+                <h1>Cavity (2D)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -455,20 +455,18 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="buoyant-cavity-2d">
-<h1>Buoyant Cavity (2D)<a class="headerlink" href="#buoyant-cavity-2d" title="Permalink to this headline">#</a></h1>
-<p>This notebook implements a steady incompressible Navier-Stokes solver + energy equation for the buoyant cavity problem.</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="cavity-2d">
+<h1>Cavity (2D)<a class="headerlink" href="#cavity-2d" title="Permalink to this headline">#</a></h1>
+<p>This notebook implements a steady incompressible Navier-Stokes solver for the cavity problem.</p>
 <p>The problem is strong form reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f1440a8-294a-44a6-b04e-30076db91f71">
-<span class="eqno">(21)<a class="headerlink" href="#equation-4f1440a8-294a-44a6-b04e-30076db91f71" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8184fd39-7882-4712-a62d-f7f8b16c50ce">
+<span class="eqno">(17)<a class="headerlink" href="#equation-8184fd39-7882-4712-a62d-f7f8b16c50ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \nabla \cdot \mathbf{u} =0&amp; in\;\Omega\\
-    \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p &amp; in\;\Omega\\ 
-    \mathbf{u}\cdot \nabla T = \alpha \Delta T&amp; in\;\Omega\\&amp; \\
-    \mathbf{u} = \mathbf{j},\; T=T_H &amp; on\;\Gamma_{hot}\\
-    \mathbf{u} = \mathbf{j},\; T=T_C &amp; on\;\Gamma_{cold}\\
-    \mathbf{u} = \mathbf{0},\;\frac{\partial T}{\partial \mathbf{n}}=0 &amp; on\;\Gamma_w
+    \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p &amp; in\;\Omega\\ &amp; \\
+    \mathbf{u} = \mathbf{i} &amp; on\;\Gamma_{lid}\\
+    \mathbf{u} = \mathbf{0} &amp; on\;\partial\Omega\setminus\Gamma_{lid}
 \end{array}
 \right.
 \end{equation}\]</div>
@@ -505,28 +503,27 @@ title="Print to PDF"
 </div>
 </div>
 <p>The problem we want to face is non-linear, whose weak formulation reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6a3443df-2465-41d8-aad9-9bde36653236">
-<span class="eqno">(22)<a class="headerlink" href="#equation-6a3443df-2465-41d8-aad9-9bde36653236" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega - \beta\int_\Omega(T-T_{ref})\mathbf{g}\cdot \mathbf{v}\,d\Omega + \int_\Omega \mathbf{u}\cdot \nabla T \, \phi\,d\Omega+\int_\Omega \alpha\nabla T \cdot \nabla\phi\,d\Omega=0
+<div class="amsmath math notranslate nohighlight" id="equation-fdd0d27c-dcb7-454b-a0f7-1fd92adb1479">
+<span class="eqno">(18)<a class="headerlink" href="#equation-fdd0d27c-dcb7-454b-a0f7-1fd92adb1479" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega=0
 \end{equation}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to mark x = 0</span>
-<span class="k">def</span> <span class="nf">hot</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">)</span>
-<span class="c1"># Function to mark x = 1</span>
-<span class="k">def</span> <span class="nf">cold</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">)</span>
-<span class="c1"># Function to mark y = 0,1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to mark x = 0, x = 1 and y = 0</span>
 <span class="k">def</span> <span class="nf">noslip_boundary</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">),</span>
-                         <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">),</span>
+                                       <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">)),</span>
+                         <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">))</span>
+
+<span class="c1"># Function to mark the lid (y = 1)</span>
+<span class="k">def</span> <span class="nf">lid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">)</span>
 
 <span class="c1"># Lid velocity</span>
 <span class="k">def</span> <span class="nf">lid_velocity_expression</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
 
-<span class="k">class</span> <span class="nc">buoyant_cavity_NS</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">cavity_NS</span><span class="p">():</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
 
         <span class="c1"># Domain</span>
@@ -537,50 +534,28 @@ title="Print to PDF"
         <span class="c1"># Functional Spaces</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">P2</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">VectorElement</span><span class="p">(</span><span class="s2">&quot;Lagrange&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ufl_cell</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">P1</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">FiniteElement</span><span class="p">(</span><span class="s2">&quot;Lagrange&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ufl_cell</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mixEl</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">MixedElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">P2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">P1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">P1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mixEl</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">MixedElement</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">P2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">P1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">W</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mixEl</span><span class="p">)</span>
 
         <span class="c1"># Test and trial functions: monolithic</span>
-        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">)</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TestFunctions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dupT</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TrialFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">upT</span>  <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
-        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upT</span><span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">)</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TestFunctions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dup</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TrialFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up</span>  <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Re</span><span class="p">,</span> <span class="n">Ri</span><span class="p">,</span> <span class="n">TH</span><span class="p">,</span> <span class="n">TC</span><span class="p">,</span> <span class="n">Pr</span> <span class="o">=</span> <span class="mf">0.71</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Re</span><span class="p">):</span>
 
         <span class="c1"># Computing the viscosity</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nuValue</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">Re</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Re = </span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Re</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; and nu = </span><span class="si">{:.2e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nuValue</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [m2/s]&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">alphaValue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nuValue</span> <span class="o">/</span> <span class="n">Pr</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pr = </span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Pr</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; and alpha = </span><span class="si">{:.2e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alphaValue</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [m2/s]&#39;</span><span class="p">)</span>
-        <span class="n">beta</span> <span class="o">=</span> <span class="n">Ri</span> <span class="o">/</span> <span class="p">(</span> <span class="mf">9.81</span> <span class="o">*</span> <span class="p">(</span><span class="n">TH</span><span class="o">-</span><span class="n">TC</span><span class="p">)</span> <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ri = </span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Ri</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; and beta = </span><span class="si">{:.2e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; [1/K]&#39;</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nuValue</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alphaValue</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">gravity</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="p">(</span><span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">(</span><span class="mf">0.</span><span class="p">),</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">(</span><span class="o">-</span><span class="mf">9.81</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Tref</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">(</span><span class="n">TC</span><span class="p">))</span>
 
         <span class="c1"># Setting Boundary Conditions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lid_velocity</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lid_velocity</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">lid_velocity_expression</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ft_hot</span> <span class="o">=</span> <span class="n">locate_entities_boundary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="n">hot</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dofs_hot_u</span> <span class="o">=</span> <span class="n">locate_dofs_topological</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ft_hot</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bc_hot_u</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lid_velocity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dofs_hot_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dofs_hot_T</span> <span class="o">=</span> <span class="n">locate_dofs_topological</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ft_hot</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">T_hot</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">T_hot</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">TH</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bc_hot_T</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T_hot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dofs_hot_T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">ft_cold</span> <span class="o">=</span> <span class="n">locate_entities_boundary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="n">cold</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dofs_cold_u</span> <span class="o">=</span> <span class="n">locate_dofs_topological</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ft_cold</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bc_cold_u</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lid_velocity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dofs_cold_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dofs_cold_T</span> <span class="o">=</span> <span class="n">locate_dofs_topological</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ft_cold</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">T_cold</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">T_cold</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">TC</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bc_cold_T</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T_cold</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dofs_cold_T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ft_lid</span> <span class="o">=</span> <span class="n">locate_entities_boundary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="n">lid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dofs_lid</span> <span class="o">=</span> <span class="n">locate_dofs_topological</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ft_lid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bc_lid</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lid_velocity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dofs_lid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">no_slip</span>  <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ft_walls</span> <span class="o">=</span> <span class="n">locate_entities_boundary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdim</span><span class="p">,</span> <span class="n">noslip_boundary</span><span class="p">)</span>
@@ -593,7 +568,7 @@ title="Print to PDF"
                                               <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bc_p</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zero_p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dofs_p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">bcs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">bc_hot_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc_hot_T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc_cold_u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc_cold_T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc_w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc_p</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bcs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">bc_lid</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc_w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc_p</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">create_snes_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">Vec</span><span class="p">:</span>  <span class="c1"># type: ignore[no-any-unimported]</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -636,24 +611,17 @@ title="Print to PDF"
     <span class="k">def</span> <span class="nf">assemble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxIter</span><span class="p">):</span>
 
         <span class="c1"># Variational forms</span>
-        <span class="c1">## Continuity</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">F</span>  <span class="o">=</span> <span class="n">inner</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span> 
-        <span class="c1">## Momentum</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">+=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">*</span> <span class="n">inner</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">),</span> <span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span> 
-                   <span class="n">inner</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span> <span class="o">-</span>
-                   <span class="n">inner</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">ufl</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span>
-                   <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tref</span><span class="p">)</span> <span class="o">*</span> <span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gravity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span><span class="p">)</span>
-        <span class="c1">## Energy</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">+=</span> <span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">phi</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span> <span class="o">+</span>
-                   <span class="n">inner</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phi</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span><span class="p">)</span>
-                  
-        <span class="bp">self</span><span class="o">.</span><span class="n">J</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upT</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dupT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nu</span> <span class="o">*</span> <span class="n">inner</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">),</span> <span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span>
+                <span class="o">+</span> <span class="n">inner</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span>
+                <span class="o">-</span> <span class="n">inner</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">ufl</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span>
+                <span class="o">+</span> <span class="n">inner</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="n">ufl</span><span class="o">.</span><span class="n">dx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dup</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_F</span> <span class="o">=</span> <span class="n">form</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_J</span> <span class="o">=</span> <span class="n">form</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">)</span>
 
         <span class="c1"># Create matrix and vector</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_obj_vec</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">create_vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_F</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">create_vector</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_F</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">create_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_J</span><span class="p">)</span>
@@ -668,53 +636,21 @@ title="Print to PDF"
         <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">setObjective</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_fun</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">setFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F_fun</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">setJacobian</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">J_fun</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">setMonitor</span><span class="p">(</span><span class="k">lambda</span> <span class="n">_</span><span class="p">,</span> <span class="n">it</span><span class="p">,</span> <span class="n">residual</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">residual</span><span class="p">))</span>
+        <span class="c1"># self.solver.setMonitor(lambda _, it, residual: print(it, residual))</span>
 
     <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">upT_copy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_snes_solution</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">upT_copy</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update_solution</span><span class="p">(</span><span class="n">upT_copy</span><span class="p">)</span>
+        <span class="n">up_copy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_snes_solution</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">up_copy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_solution</span><span class="p">(</span><span class="n">up_copy</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solution</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>The following function is used to extract the values of the velocity components.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">64</span>
-
-<span class="n">TH</span> <span class="o">=</span> <span class="mf">320.</span>
-<span class="n">TC</span> <span class="o">=</span> <span class="mf">300.</span>
-<span class="n">Re</span> <span class="o">=</span> <span class="mf">150.</span>
-<span class="n">Ri</span> <span class="o">=</span> <span class="mf">2.</span>
-
-<span class="n">cavity</span> <span class="o">=</span> <span class="n">buoyant_cavity_NS</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="n">cavity</span><span class="o">.</span><span class="n">parameters</span><span class="p">(</span><span class="n">Re</span><span class="p">,</span> <span class="n">Ri</span><span class="p">,</span> <span class="n">TH</span><span class="p">,</span> <span class="n">TC</span><span class="p">)</span>
-<span class="n">cavity</span><span class="o">.</span><span class="n">assemble</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">upT_sol</span> <span class="o">=</span> <span class="n">cavity</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
-<span class="p">(</span><span class="n">u_sol</span><span class="p">,</span> <span class="n">p_sol</span><span class="p">,</span> <span class="n">T_sol</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">upT_sol</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">(),</span> <span class="n">upT_sol</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">(),</span> <span class="n">upT_sol</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Re = 150 and nu = 6.67e-03 [m2/s]
-Pr = 1 and alpha = 9.39e-03 [m2/s]
-Ri = 2 and beta = 1.02e-02 [1/K]
-0 3536.570548584404
-1 0.18003842168825648
-2 0.060906347113540954
-3 0.022582487672829263
-4 0.006795033701058301
-5 0.0012571159339550607
-6 2.0879274712398992e-05
-</pre></div>
-</div>
-</div>
-</div>
-<p>The following function is used to extract the values of the velocity and temperature functions.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract2D_vec</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">u_sol</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract2D</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">u_sol</span><span class="p">):</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
     <span class="n">ux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
     <span class="n">uy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
@@ -738,68 +674,62 @@ Ri = 2 and beta = 1.02e-02 [1/K]
         <span class="n">ux</span><span class="p">[</span><span class="n">ii</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">u_sol</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">xPlot</span><span class="p">,</span> <span class="n">cells</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
         <span class="n">uy</span><span class="p">[</span><span class="n">ii</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">u_sol</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">xPlot</span><span class="p">,</span> <span class="n">cells</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">ux</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">uy</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">grid</span>
-
-<span class="k">def</span> <span class="nf">extract2D_scalar</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">T_sol</span><span class="p">):</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
-        <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
-        <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">grid</span>
-
-        <span class="n">bb_tree</span> <span class="o">=</span> <span class="n">dolfinx</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">BoundingBoxTree</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">problem</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">topology</span><span class="o">.</span><span class="n">dim</span><span class="p">)</span>
-        <span class="n">cells</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">points_on_proc</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">cell_candidates</span> <span class="o">=</span> <span class="n">dolfinx</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">compute_collisions</span><span class="p">(</span><span class="n">bb_tree</span><span class="p">,</span> <span class="n">points</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="n">colliding_cells</span> <span class="o">=</span> <span class="n">dolfinx</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">compute_colliding_cells</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">cell_candidates</span><span class="p">,</span> <span class="n">points</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">points</span><span class="o">.</span><span class="n">T</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">colliding_cells</span><span class="o">.</span><span class="n">links</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
-                <span class="n">points_on_proc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
-                <span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">colliding_cells</span><span class="o">.</span><span class="n">links</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">xPlot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points_on_proc</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-
-        <span class="n">T</span><span class="p">[</span><span class="n">ii</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">T_sol</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">xPlot</span><span class="p">,</span> <span class="n">cells</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">T</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">grid</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s plot the solution</p>
+<p>Let’s solve the problem</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">cavity</span> <span class="o">=</span> <span class="n">cavity_NS</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
-<span class="n">ux</span><span class="p">,</span> <span class="n">uy</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">extract2D_vec</span><span class="p">(</span><span class="n">cavity</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">u_sol</span><span class="p">)</span>
-<span class="n">T</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">extract2D_scalar</span><span class="p">(</span><span class="n">cavity</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">T_sol</span><span class="p">)</span>
+<span class="n">ReVec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">])</span>
 
-<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+<span class="n">u_list</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ux</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">uy</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Velocity streamlines&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">T</span><span class="o">-</span><span class="n">TC</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="mi">40</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="n">TH</span><span class="o">-</span><span class="n">TC</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$T-T_</span><span class="si">{ref}</span><span class="s1">\; [K]$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$Re = </span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Re</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,\;Ri = </span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Ri</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ReVec</span><span class="p">)):</span>
+    <span class="n">cavity</span><span class="o">.</span><span class="n">parameters</span><span class="p">(</span><span class="n">ReVec</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+    <span class="n">cavity</span><span class="o">.</span><span class="n">assemble</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">up_sol</span> <span class="o">=</span> <span class="n">cavity</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="p">(</span><span class="n">u_sol</span><span class="p">,</span> <span class="n">p_sol</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">up_sol</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">(),</span> <span class="n">up_sol</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">collapse</span><span class="p">())</span>
+    <span class="n">u_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_sol</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/buoyantCavity_8_0.png" src="../_images/buoyantCavity_8_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Re = 20 and nu = 5.00e-02 [m2/s]
+Re = 100 and nu = 1.00e-02 [m2/s]
+Re = 400 and nu = 2.50e-03 [m2/s]
+Re = 1000 and nu = 1.00e-03 [m2/s]
+Re = 2000 and nu = 5.00e-04 [m2/s]
+Re = 2500 and nu = 4.00e-04 [m2/s]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s make some 2D streamline plots</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ReVec</span><span class="p">)):</span>
+    <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span><span class="p">,</span> <span class="n">grid</span> <span class="o">=</span> <span class="n">extract2D</span><span class="p">(</span><span class="n">cavity</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">u_list</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(((</span><span class="n">uy</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="n">ux</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">ux</span><span class="p">,</span> <span class="n">uy</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ux</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">uy</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;turbo&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$y$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$Re = </span><span class="si">{:.0f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ReVec</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Cavity2D_9_0.png" src="../_images/Cavity2D_9_0.png" />
 </div>
 </div>
 </div>
@@ -831,17 +761,17 @@ Ri = 2 and beta = 1.02e-02 [1/K]
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="steadyBoussinesq.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="steadyNS.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Steady Navier-Stokes + energy equation (boussinesq)</p>
+            <p class="prev-next-title">Steady Navier-Stokes</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../biblio.html" title="next page">
+    <a class='right-next' id="next-link" href="unsteadyNS.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliography</p>
+        <p class="prev-next-title">Unsteady Navier-Stokes</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
