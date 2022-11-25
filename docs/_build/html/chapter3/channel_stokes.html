@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Unsteady Navier-Stokes" href="unsteadyNS.html" />
+    <link rel="next" title="Steady Navier-Stokes" href="steadyNS.html" />
     <link rel="prev" title="Steady Stokes" href="steadyStokes.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -185,8 +185,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="unsteadyNS.html">
-   Unsteady Navier-Stokes
+  <a class="reference internal" href="steadyNS.html">
+   Steady Navier-Stokes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -195,8 +195,42 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="channel_steadyNS.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="unsteadyNS.html">
+   Unsteady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
     <a class="reference internal" href="channel_unsteadyNS.html">
      Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="steadyBoussinesq.html">
+   Steady Navier-Stokes + energy equation (boussinesq)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="buoyantCavity.html">
+     Buoyant Cavity (2D)
     </a>
    </li>
   </ul>
@@ -471,8 +505,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="stokes-problem-channel-flow">
 <h1>Stokes problem - Channel Flow<a class="headerlink" href="#stokes-problem-channel-flow" title="Permalink to this headline">#</a></h1>
 <p>This notebook implements a block FE solution of the following problem</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3168ae7f-5653-460f-bb26-9de052fbb8e9">
-<span class="eqno">(12)<a class="headerlink" href="#equation-3168ae7f-5653-460f-bb26-9de052fbb8e9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d75e95d2-ee64-466f-86f2-6a175a2756f3">
+<span class="eqno">(12)<a class="headerlink" href="#equation-d75e95d2-ee64-466f-86f2-6a175a2756f3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         -\mu\Delta \mathbf{u} + \nabla p =0 &amp; in \; \Omega\\
@@ -555,8 +589,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>Let us define the functional spaces</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a61435e4-b938-47dc-b997-67d2ffcfc95b">
-<span class="eqno">(13)<a class="headerlink" href="#equation-a61435e4-b938-47dc-b997-67d2ffcfc95b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-06d408ef-c9c2-4a38-8f90-1c04247d6154">
+<span class="eqno">(13)<a class="headerlink" href="#equation-06d408ef-c9c2-4a38-8f90-1c04247d6154" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{split}
 \mathcal{V} &amp;= \left\{\mathbf{v}\in\left[\mathcal{H}^1(\Omega)\right]^2:\,
                                                                         \left.\mathbf{v}\right|_{\Gamma_{in}} = \mathbf{u}_{in}\;,\;
@@ -567,14 +601,14 @@ title="Print to PDF"
 \end{split}
 \end{equation}\]</div>
 <p>so that, the weak formulation reads</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8ca803ba-5683-4347-a4c6-6ecb5f13eb9c">
-<span class="eqno">(14)<a class="headerlink" href="#equation-8ca803ba-5683-4347-a4c6-6ecb5f13eb9c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6bb97c4d-ff62-4960-8b80-a1b0bda27cc5">
+<span class="eqno">(14)<a class="headerlink" href="#equation-6bb97c4d-ff62-4960-8b80-a1b0bda27cc5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega\mu\nabla\mathbf{u}\cdot\mathbf{v}\,d\Omega -\int_\Omega p \,\nabla\cdot \mathbf{v}\,d\Omega +
 \int_\Omega q \,\nabla\cdot \mathbf{u} = 0\qquad \forall \mathbf{v}\in\mathcal{V}_0, q\in\mathcal{Q}
 \end{equation}\]</div>
 <p>which results in the following saddle point system</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5aa29574-2d10-437d-9273-f2427b3e3894">
-<span class="eqno">(15)<a class="headerlink" href="#equation-5aa29574-2d10-437d-9273-f2427b3e3894" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cc36a555-69c7-4b7b-b30a-baaaa6d597a4">
+<span class="eqno">(15)<a class="headerlink" href="#equation-cc36a555-69c7-4b7b-b30a-baaaa6d597a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left[
 \begin{array}{ll}
 A &amp; B^T \\
@@ -1071,10 +1105,10 @@ B &amp; 0
             <p class="prev-next-title">Steady Stokes</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="unsteadyNS.html" title="next page">
+    <a class='right-next' id="next-link" href="steadyNS.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Unsteady Navier-Stokes</p>
+        <p class="prev-next-title">Steady Navier-Stokes</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

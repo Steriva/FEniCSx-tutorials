@@ -22,9 +22,15 @@ parts:
       - file: chapter3/steadyStokes
         sections:
         - file: chapter3/channel_stokes.ipynb
+      - file: chapter3/steadyNS
+        sections:
+        - file: chapter3/channel_steadyNS.ipynb
       - file: chapter3/unsteadyNS
         sections:
         - file: chapter3/channel_unsteadyNS.ipynb
+      - file: chapter3/steadyBoussinesq
+        sections:
+        - file: chapter3/buoyantCavity.ipynb
   - caption: Appendix
     chapters:
       - file: biblio

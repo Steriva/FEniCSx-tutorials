@@ -179,6 +179,23 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/channel_stokes.html">
+     Stokes problem - Channel Flow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/steadyNS.html">
+   Steady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/channel_steadyNS.html">
      Implementation
     </a>
    </li>
@@ -188,8 +205,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="../chapter3/unsteadyNS.html">
    Unsteady Navier-Stokes
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -197,6 +214,23 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/channel_unsteadyNS.html">
      Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/steadyBoussinesq.html">
+   Steady Navier-Stokes + energy equation (boussinesq)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/buoyantCavity.html">
+     Buoyant Cavity (2D)
     </a>
    </li>
   </ul>
@@ -442,8 +476,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="weak-formulations">
 <h1>Weak Formulations<a class="headerlink" href="#weak-formulations" title="Permalink to this headline">#</a></h1>
 <p>Let <span class="math notranslate nohighlight">\(\Omega\subset\mathbb{R}^{d}\)</span> with <span class="math notranslate nohighlight">\(d=2,3\)</span> and <span class="math notranslate nohighlight">\(\partial \Omega = \Gamma_D\cup\Gamma_N\)</span> its boundary, let us consider the following problem (in strong form):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4c8189e3-ab36-4c6c-8afb-ff2155dc7409">
-<span class="eqno">(3)<a class="headerlink" href="#equation-4c8189e3-ab36-4c6c-8afb-ff2155dc7409" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-98e0c077-f347-4463-96db-8a9d9b91c517">
+<span class="eqno">(3)<a class="headerlink" href="#equation-98e0c077-f347-4463-96db-8a9d9b91c517" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         -\Delta u = f &amp; \mbox{in } \Omega\\
@@ -465,15 +499,15 @@ title="Print to PDF"
 \int_\Omega -\Delta u\,v \,d\Omega=\int_\Omega f\,v\,d\Omega\qquad v\in\mathcal{V}_0
 \]</div>
 <p>and by applying the integration by parts formula and the effect of the BCs</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4394b362-9bbd-4331-a2e5-8ef26268ad98">
-<span class="eqno">(4)<a class="headerlink" href="#equation-4394b362-9bbd-4331-a2e5-8ef26268ad98" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3e469d30-4de3-4de1-af8b-e5cf65d6d939">
+<span class="eqno">(4)<a class="headerlink" href="#equation-3e469d30-4de3-4de1-af8b-e5cf65d6d939" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nabla u\cdot \nabla v \,d\Omega=\int_\Omega f\,v\,d\Omega+\int_{\Gamma_N}g\,v\,d\sigma\qquad v\in\mathcal{V}_0
 \end{equation}\]</div>
 <div class="section" id="galerkin-approximation">
 <h2>Galerkin approximation<a class="headerlink" href="#galerkin-approximation" title="Permalink to this headline">#</a></h2>
 <p>Let us introduce a computational grid <span class="math notranslate nohighlight">\(\mathcal{T}_h\)</span> (dim<span class="math notranslate nohighlight">\(\mathcal{T}_h = \mathcal{N}_h\)</span>) of the domain <span class="math notranslate nohighlight">\(\Omega\)</span> and the finite dimensional spaces <span class="math notranslate nohighlight">\(\mathcal{V}_h\subset\mathcal{V}\)</span> and <span class="math notranslate nohighlight">\(\mathcal{V}_{h,0}\subset\mathcal{V}_0\)</span>. The Galerkin approximation <span id="id1">[<a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">2</a>, <a class="reference internal" href="../biblio.html#id4" title="Alfio Quarteroni, Riccardo Sacco, and Fausto Saleri. Numerical Mathematics. Springer, Berlin, Heidelberg, ii edition, 2007. ISBN 978-3-540-49809-4.">3</a>]</span> reads: *find <span class="math notranslate nohighlight">\(u_h\in\mathcal{V}_h\)</span> s.t.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-022b960b-5c88-41d9-b17c-cbe625bdbde0">
-<span class="eqno">(5)<a class="headerlink" href="#equation-022b960b-5c88-41d9-b17c-cbe625bdbde0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3bfe88fb-16fd-446f-a918-bd1be52f5188">
+<span class="eqno">(5)<a class="headerlink" href="#equation-3bfe88fb-16fd-446f-a918-bd1be52f5188" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nabla u_h\cdot \nabla v_h \,d\Omega=\int_\Omega f_h\,v_h\,d\Omega+\int_{\Gamma_N}g\,v_h\,d\sigma\qquad v_h\in\mathcal{V}_{h,0}
 \end{equation}\]</div>
 </div>
@@ -493,8 +527,8 @@ u_h(\mathbf{x}) = \sum_{j=1}^{\mathcal{N}_h}\alpha_j \phi_j(\mathbf{x})
 <img alt="hatFun" src="../_images/hatFunction.png" /></p>
 </div>
 </div><p>By taking <span class="math notranslate nohighlight">\(v_h=\phi_k\)</span> as the test function, the Galerkin problem reduces to</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d022054e-d2f7-4f3d-8ef2-6c3784fd5681">
-<span class="eqno">(6)<a class="headerlink" href="#equation-d022054e-d2f7-4f3d-8ef2-6c3784fd5681" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1e299871-22d7-479a-82e9-f18f65acad0b">
+<span class="eqno">(6)<a class="headerlink" href="#equation-1e299871-22d7-479a-82e9-f18f65acad0b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nabla u_h\cdot \nabla \phi_k \,d\Omega=\int_\Omega f_h\,\phi_k\,d\Omega+\int_{\Gamma_N}g\,\phi_k\,d\sigma\qquad j = 1, \dots, \mathcal{N}_h
 \end{equation}\]</div>
 <p>then, the linear expansion can be introduced into the problem which results (in index notation)</p>
@@ -503,8 +537,8 @@ u_h(\mathbf{x}) = \sum_{j=1}^{\mathcal{N}_h}\alpha_j \phi_j(\mathbf{x})
 \alpha_j \int_\Omega \nabla \phi_j\cdot \nabla \phi_k \,d\Omega=\int_\Omega f_h\,\phi_k\,d\Omega+\int_{\Gamma_N}g\,\phi_k\,d\sigma
 \]</div>
 <p>By defining the matrix <span class="math notranslate nohighlight">\(A_{kj} = \displaystyle\int_\Omega \nabla \phi_j\cdot \nabla \phi_k \,d\Omega\)</span> and the vectors <span class="math notranslate nohighlight">\(f_k =  \displaystyle\int_\Omega f_h\,\phi_k\,d\Omega\)</span> and <span class="math notranslate nohighlight">\(g_k =  \displaystyle\int_{\Gamma_N}g\,\phi_k\,d\sigma\)</span>, the problem into the following linear system in the unknowns <span class="math notranslate nohighlight">\(\alpha_j\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-a621b852-5e77-4856-b3ef-e892a9bcf191">
-<span class="eqno">(7)<a class="headerlink" href="#equation-a621b852-5e77-4856-b3ef-e892a9bcf191" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-247f48de-8878-41c8-823e-22d0c97e8595">
+<span class="eqno">(7)<a class="headerlink" href="#equation-247f48de-8878-41c8-823e-22d0c97e8595" title="Permalink to this equation">#</a></span>\[\begin{equation}
 A_{kj}\alpha_j = f_k + g_k\qquad j = 1, \dots, \mathcal{N}_h
 \end{equation}\]</div>
 </div>

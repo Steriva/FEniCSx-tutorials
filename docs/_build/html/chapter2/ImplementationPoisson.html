@@ -179,6 +179,23 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/channel_stokes.html">
+     Stokes problem - Channel Flow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/steadyNS.html">
+   Steady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/channel_steadyNS.html">
      Implementation
     </a>
    </li>
@@ -188,8 +205,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="../chapter3/unsteadyNS.html">
    Unsteady Navier-Stokes
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -197,6 +214,23 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/channel_unsteadyNS.html">
      Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/steadyBoussinesq.html">
+   Steady Navier-Stokes + energy equation (boussinesq)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/buoyantCavity.html">
+     Buoyant Cavity (2D)
     </a>
    </li>
   </ul>
@@ -511,8 +545,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="implementation">
 <h1>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h1>
 <p>This notebook implements a simple solver for the steady heat equation, an example of Poisson problem.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e4e3a2a4-403c-4b50-b384-55a200197d0d">
-<span class="eqno">(10)<a class="headerlink" href="#equation-e4e3a2a4-403c-4b50-b384-55a200197d0d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-018f2271-3786-4989-bfe1-c8c42f105c13">
+<span class="eqno">(10)<a class="headerlink" href="#equation-018f2271-3786-4989-bfe1-c8c42f105c13" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         -\Delta T = f &amp; \mbox{in }\Omega\\

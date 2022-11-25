@@ -1,7 +1,0 @@
-from mpi4py import MPI
-from dolfinx import mesh
-N = 20
-domain = mesh.create_unit_square(MPI.COMM_WORLD, N, N, mesh.CellType.quadrilateral)
-
-from dolfinx.fem import FunctionSpace
-V = FunctionSpace(domain, ("CG", 1))

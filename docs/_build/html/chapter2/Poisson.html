@@ -179,6 +179,23 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/channel_stokes.html">
+     Stokes problem - Channel Flow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/steadyNS.html">
+   Steady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/channel_steadyNS.html">
      Implementation
     </a>
    </li>
@@ -188,8 +205,8 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="../chapter3/unsteadyNS.html">
    Unsteady Navier-Stokes
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -197,6 +214,23 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="../chapter3/channel_unsteadyNS.html">
      Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter3/steadyBoussinesq.html">
+   Steady Navier-Stokes + energy equation (boussinesq)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter3/buoyantCavity.html">
+     Buoyant Cavity (2D)
     </a>
    </li>
   </ul>
@@ -442,8 +476,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="poisson">
 <h1>Poisson<a class="headerlink" href="#poisson" title="Permalink to this headline">#</a></h1>
 <p>The first problem that will be analysed is an elliptic equation, i.e. the Poisson problem</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6948cafb-2dfe-45a2-aef5-bcb820e1aaf6">
-<span class="eqno">(8)<a class="headerlink" href="#equation-6948cafb-2dfe-45a2-aef5-bcb820e1aaf6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-30abb772-74f5-4def-a41a-10cb549e78c7">
+<span class="eqno">(8)<a class="headerlink" href="#equation-30abb772-74f5-4def-a41a-10cb549e78c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         -\nabla \cdot \left(k\nabla T\right) = q''' &amp; \mbox{in }\Omega\\
@@ -467,8 +501,8 @@ title="Print to PDF"
 -\int_\Omega\nabla \cdot \left(k\nabla T\right)\,\varphi\,d\Omega = \int_\Omega q'''\,\varphi\,d\Omega
 \]</div>
 <p>we can apply the integration by parts to get the weak formulation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-16b7a02d-1747-45b0-b725-ab37f33c9976">
-<span class="eqno">(9)<a class="headerlink" href="#equation-16b7a02d-1747-45b0-b725-ab37f33c9976" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d6bbf2db-7a79-4ca4-b37f-7f00f8289502">
+<span class="eqno">(9)<a class="headerlink" href="#equation-d6bbf2db-7a79-4ca4-b37f-7f00f8289502" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega k\nabla T\cdot\nabla\varphi\,d\Omega = \int_\Omega q'''\,\varphi\,d\Omega + \int_{\Gamma_N}g_N\,\varphi\,d\sigma
 \end{equation}\]</div>
 </div>

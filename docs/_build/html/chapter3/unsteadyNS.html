@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Implementation" href="channel_unsteadyNS.html" />
-    <link rel="prev" title="Stokes problem - Channel Flow" href="channel_stokes.html" />
+    <link rel="prev" title="Implementation" href="channel_steadyNS.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -184,12 +184,29 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="steadyNS.html">
+   Steady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="channel_steadyNS.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
    Unsteady Navier-Stokes
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -197,6 +214,23 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="channel_unsteadyNS.html">
      Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="steadyBoussinesq.html">
+   Steady Navier-Stokes + energy equation (boussinesq)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="buoyantCavity.html">
+     Buoyant Cavity (2D)
     </a>
    </li>
   </ul>
@@ -398,8 +432,8 @@ title="Print to PDF"
 in regular markdown files (<code class="docutils literal notranslate"><span class="pre">.md</span></code>), you’ll write in the same flavor of markdown
 called <strong>MyST Markdown</strong>.
 This is a simple file to help you get started and show off some syntax.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ac55c76d-06b3-48a4-a8d2-c123edc401bc">
-<span class="eqno">(16)<a class="headerlink" href="#equation-ac55c76d-06b3-48a4-a8d2-c123edc401bc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-44f88130-c66d-438f-af4b-cab6c3fa658f">
+<span class="eqno">(17)<a class="headerlink" href="#equation-44f88130-c66d-438f-af4b-cab6c3fa658f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Delta u = 0
 \end{equation}\]</div>
 <div class="toctree-wrapper compound">
@@ -433,11 +467,11 @@ This is a simple file to help you get started and show off some syntax.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="channel_stokes.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="channel_steadyNS.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Stokes problem - Channel Flow</p>
+            <p class="prev-next-title">Implementation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="channel_unsteadyNS.html" title="next page">
