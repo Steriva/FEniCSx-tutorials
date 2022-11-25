@@ -459,8 +459,8 @@ title="Print to PDF"
 <h1>Cavity (2D)<a class="headerlink" href="#cavity-2d" title="Permalink to this headline">#</a></h1>
 <p>This notebook implements a steady incompressible Navier-Stokes solver for the cavity problem.</p>
 <p>The problem is strong form reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8184fd39-7882-4712-a62d-f7f8b16c50ce">
-<span class="eqno">(19)<a class="headerlink" href="#equation-8184fd39-7882-4712-a62d-f7f8b16c50ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fb9a4e87-080d-48d9-970b-f785de13b212">
+<span class="eqno">(19)<a class="headerlink" href="#equation-fb9a4e87-080d-48d9-970b-f785de13b212" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \nabla \cdot \mathbf{u} =0&amp; in\;\Omega\\
@@ -503,8 +503,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>The problem we want to face is non-linear, whose weak formulation reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fdd0d27c-dcb7-454b-a0f7-1fd92adb1479">
-<span class="eqno">(20)<a class="headerlink" href="#equation-fdd0d27c-dcb7-454b-a0f7-1fd92adb1479" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b0c461f7-47d8-4ae3-95ad-ec0d47040ba7">
+<span class="eqno">(20)<a class="headerlink" href="#equation-b0c461f7-47d8-4ae3-95ad-ec0d47040ba7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega=0
 \end{equation}\]</div>
 <div class="cell docutils container">
