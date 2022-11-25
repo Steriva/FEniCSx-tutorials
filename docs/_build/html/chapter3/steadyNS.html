@@ -428,12 +428,12 @@ title="Print to PDF"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="steady-navier-stokes">
 <h1>Steady Navier-Stokes<a class="headerlink" href="#steady-navier-stokes" title="Permalink to this headline">#</a></h1>
-<p>The Stokes equations describes the flows of incompressible viscous fluid when the importance of inertia is low with respect to viscous forces</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d386e68a-d6d9-43d9-89bf-f0c36a9a9d3d">
-<span class="eqno">(18)<a class="headerlink" href="#equation-d386e68a-d6d9-43d9-89bf-f0c36a9a9d3d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<p>The incompressible Navier-Stokes equations describes the flows of viscous fluid when the importance of inertia is not negligible with respect to viscous forces</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f5b9f065-28d7-4d5b-b124-90b37d958cfd">
+<span class="eqno">(18)<a class="headerlink" href="#equation-f5b9f065-28d7-4d5b-b124-90b37d958cfd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
-        \nu\Delta \mathbf{u}-\nabla p = 0 &amp; \mbox{in }\Omega\\
+       (\mathbf{u}\cdot\cdot)\mathbf{u}- \nu\Delta \mathbf{u}+\nabla p = 0 &amp; \mbox{in }\Omega\\
         \nabla\cdot \mathbf{u} = 0 &amp; \mbox{in }\Omega\\
         \mathbf{u}=\mathbf{u}_D &amp; \mbox{on }\Gamma_D\\
         \nu\frac{\partial \mathbf{u}}{\partial \mathbf{n}}-p\mathbf{n}=g\mathbf{n} &amp; \mbox{on }\Gamma_N
