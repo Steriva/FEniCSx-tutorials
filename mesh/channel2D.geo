@@ -47,11 +47,11 @@ Physical Surface("domain", 1) = {1};
 
 n = 10;  
 //+
-Transfinite Curve {13, 6} = 30*n Using Progression 1;
+Transfinite Curve {13, 6} = 70*n Using Progression 1;
 //+
-Transfinite Curve {7} = 2*n Using Progression 0.95;
+Transfinite Curve {7} = 2.5*n Using Progression 0.95;
 //+
-Transfinite Curve {5} = 2*n Using Progression 1/0.95;
+Transfinite Curve {5} = 2.5*n Using Progression 1/0.95;
 //+
 Transfinite Surface {1};
 //+
