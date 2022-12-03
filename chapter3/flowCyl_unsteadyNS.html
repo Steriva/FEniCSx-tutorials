@@ -527,7 +527,7 @@ title="Print to PDF"
 <p>This notebook implements an unsteady incompressible Navier-Stokes solver for the flow over a cylinder (the problem is based on the <a class="reference external" href="https://jorgensd.github.io/dolfinx-tutorial/chapter2/ns_code2.html">tutorial of FEniCSx</a>, that is the DFG 2D benchmark).</p>
 <p>The problem is strong form reads:</p>
 <div class="amsmath math notranslate nohighlight" id="equation-2bc94ce6-fb8e-478a-ad48-52b1548cfeb9">
-<span class="eqno">(22)<a class="headerlink" href="#equation-2bc94ce6-fb8e-478a-ad48-52b1548cfeb9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(24)<a class="headerlink" href="#equation-2bc94ce6-fb8e-478a-ad48-52b1548cfeb9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \nabla \cdot \mathbf{u} = 0&amp; in\;\Omega\\
@@ -632,7 +632,7 @@ title="Print to PDF"
 <h2>Predictor: NS momentum<a class="headerlink" href="#predictor-ns-momentum" title="Permalink to this headline">#</a></h2>
 <p>We can define the variational formulations for the time advancement loop. Let’s start with the projection step</p>
 <div class="amsmath math notranslate nohighlight" id="equation-1f25a6aa-40ba-4b34-b370-c99b04b73d94">
-<span class="eqno">(23)<a class="headerlink" href="#equation-1f25a6aa-40ba-4b34-b370-c99b04b73d94" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(25)<a class="headerlink" href="#equation-1f25a6aa-40ba-4b34-b370-c99b04b73d94" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \displaystyle \frac{\tilde{\mathbf{u}}-\mathbf{n}^n}{\Delta t}+\left(\mathbf{u}^n\cdot \nabla\right)\tilde{\mathbf{u}}= \frac{1}{Re}\Delta \tilde{\mathbf{u}}-\nabla p^n &amp; in\;\Omega\\ &amp; \\
@@ -644,7 +644,7 @@ title="Print to PDF"
 \end{equation}\]</div>
 <p>whose weak formulation reads</p>
 <div class="amsmath math notranslate nohighlight" id="equation-bd5ceba0-d921-4537-8423-c2464a5a6935">
-<span class="eqno">(24)<a class="headerlink" href="#equation-bd5ceba0-d921-4537-8423-c2464a5a6935" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(26)<a class="headerlink" href="#equation-bd5ceba0-d921-4537-8423-c2464a5a6935" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \tilde{\mathbf{u}}\cdot \mathbf{v}\,d\Omega + \Delta t \int_\Omega \left(\mathbf{u}^n\cdot \nabla\right)\tilde{\mathbf{u}}\cdot \mathbf{v}\,d\Omega + \frac{ \Delta t}{Re} \int_\Omega\nabla \tilde{\mathbf{u}}\cdot \nabla \mathbf{v}\,d\Omega =
 \int_\Omega {\mathbf{u}}^n\cdot \mathbf{v}\,d\Omega + \Delta t \int_{\Gamma_{out}}g\mathbf{n}\cdot \mathbf{v}\,d\sigma -  \Delta t\int_\Omega \nabla p^n\cdot \mathbf{v}\,d\Omega 
 \end{equation}\]</div>
@@ -671,7 +671,7 @@ title="Print to PDF"
 <h2>Pressure projection<a class="headerlink" href="#pressure-projection" title="Permalink to this headline">#</a></h2>
 <p>The projection step consists in a Poisson problem, i.e.</p>
 <div class="amsmath math notranslate nohighlight" id="equation-4376ff86-38f4-4a48-889d-f00bb2ae9a2a">
-<span class="eqno">(25)<a class="headerlink" href="#equation-4376ff86-38f4-4a48-889d-f00bb2ae9a2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(27)<a class="headerlink" href="#equation-4376ff86-38f4-4a48-889d-f00bb2ae9a2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         -\Delta \delta p=-\frac{1}{\Delta t}\nabla\cdot \tilde{\mathbf{u}} &amp; in\;\Omega\\
@@ -682,7 +682,7 @@ title="Print to PDF"
 \end{equation}\]</div>
 <p>whose weak formulation reads</p>
 <div class="amsmath math notranslate nohighlight" id="equation-ef07914b-a264-4da8-9e76-891d5048a111">
-<span class="eqno">(26)<a class="headerlink" href="#equation-ef07914b-a264-4da8-9e76-891d5048a111" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(28)<a class="headerlink" href="#equation-ef07914b-a264-4da8-9e76-891d5048a111" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nabla \delta p\cdot \nabla q\,d\Omega = -\frac{1}{\Delta t}\int_\Omega q\nabla \cdot \tilde{\mathbf{u}}\,d\Omega
 \qquad \forall q\in\mathcal{Q}
 \end{equation}\]</div>
@@ -708,7 +708,7 @@ title="Print to PDF"
 <h2>Correction<a class="headerlink" href="#correction" title="Permalink to this headline">#</a></h2>
 <p>Then, a third auxiliary variational problem is defined to update the velocity</p>
 <div class="amsmath math notranslate nohighlight" id="equation-ea3886d7-b9b6-48df-9a02-2d1b263b7356">
-<span class="eqno">(27)<a class="headerlink" href="#equation-ea3886d7-b9b6-48df-9a02-2d1b263b7356" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(29)<a class="headerlink" href="#equation-ea3886d7-b9b6-48df-9a02-2d1b263b7356" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \mathbf{u}^{n+1} \cdot \mathbf{v} \,d\Omega= \int_\Omega\left( \tilde{\mathbf{u}}-\Delta t\nabla\delta p\right) \cdot \mathbf{v} \,d\Omega
 \end{equation}\]</div>
 <div class="cell docutils container">
@@ -730,7 +730,7 @@ title="Print to PDF"
 </div>
 <p>The pressure is also updated as</p>
 <div class="amsmath math notranslate nohighlight" id="equation-c8f839ed-798b-4fbd-8977-90119ab2302e">
-<span class="eqno">(28)<a class="headerlink" href="#equation-c8f839ed-798b-4fbd-8977-90119ab2302e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(30)<a class="headerlink" href="#equation-c8f839ed-798b-4fbd-8977-90119ab2302e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 p^{n+1}=p^n+\delta p
 \end{equation}\]</div>
 </div>

@@ -402,12 +402,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivation-of-the-linear-system">
+   Derivation of the linear system
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -419,6 +443,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivation-of-the-linear-system">
+   Derivation of the linear system
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -428,18 +465,65 @@ title="Print to PDF"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="steady-navier-stokes">
 <h1>Steady Navier-Stokes<a class="headerlink" href="#steady-navier-stokes" title="Permalink to this headline">#</a></h1>
-<p>The incompressible Navier-Stokes equations describes the flows of viscous fluid when the importance of inertia is not negligible with respect to viscous forces</p>
-<div class="amsmath math notranslate nohighlight" id="equation-95dd6080-9130-4eec-802a-c2b51a5ce6fe">
-<span class="eqno">(18)<a class="headerlink" href="#equation-95dd6080-9130-4eec-802a-c2b51a5ce6fe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<p>The Navier-Stokes equations describes the flows of incompressible viscous fluid</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b0235a0f-c68e-4656-a6af-cd21a1e4c8db">
+<span class="eqno">(18)<a class="headerlink" href="#equation-b0235a0f-c68e-4656-a6af-cd21a1e4c8db" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
-       (\mathbf{u}\cdot\nabla)\mathbf{u}- \nu\Delta \mathbf{u}+\nabla p = 0 &amp; \mbox{in }\Omega\\
+        \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}-\nu\Delta \mathbf{u}+\nabla p = 0 &amp; \mbox{in }\Omega\\
         \nabla\cdot \mathbf{u} = 0 &amp; \mbox{in }\Omega\\
         \mathbf{u}=\mathbf{u}_D &amp; \mbox{on }\Gamma_D\\
         \nu\frac{\partial \mathbf{u}}{\partial \mathbf{n}}-p\mathbf{n}=g\mathbf{n} &amp; \mbox{on }\Gamma_N
     \end{array}
 \right.
 \end{equation}\]</div>
+<p>This problem has a saddle point structure, making its numerical solution non-trivial, in addiction the convective term <span class="math notranslate nohighlight">\(\left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\)</span> is non-linear. Therefore, the numerical solver should include a Newton or fixed-point methods (or others).</p>
+<p>Before entering into the details of the Galerkin problem let us derive the weak formulation.
+Let <span class="math notranslate nohighlight">\(\mathcal{V}\subset[\mathcal{H}^1]^d,\; \mathcal{V}_0[\subset\mathcal{H}^1]^d\)</span> the velocity trial and test spaces defined as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{V} = \left\{\mathbf{v}\in[\mathcal{H}^1(\Omega)]^d:\;\left. \mathbf{v}\right|_{\Gamma_D} = \mathbf{u}_D\right\}\qquad 
+\mathcal{V}_0 = \left\{\mathbf{v}\in[\mathcal{H}^1(\Omega)]^d:\;\left. \mathbf{v}\right|_{\Gamma_D} = \mathbf{0}\right\}
+\]</div>
+<p>and let <span class="math notranslate nohighlight">\(\mathcal{Q}= L^2(\Omega)\)</span> the pressure trial and test space. The momentum equation can be multiplied by the test function <span class="math notranslate nohighlight">\(\mathbf{v}\in\mathcal{V}_0\)</span> and the integration by parts is applied</p>
+<div class="math notranslate nohighlight">
+\[
+\int_\Omega \left[\left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\right]\cdot \mathbf{v}\,d\Omega+\int_\Omega \nu\nabla \mathbf{u}\cdot \nabla\mathbf{v}\,d\Omega -\int_\Omega p \nabla\cdot \mathbf{v}\,d\Omega - \int_{\partial\Omega} \left(\nu\frac{\partial \mathbf{u}}{\partial \mathbf{n}}-p\mathbf{n}\right)\cdot \mathbf{v}\,d\sigma=0
+\]</div>
+<p>whereas the continuity equation is multiplied by <span class="math notranslate nohighlight">\(q\in\mathcal{Q}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+-\int_\Omega q \nabla\cdot \mathbf{u}\,d\Omega=0
+\]</div>
+<p>Imposing the boundary conditions, the weak formulation reads: <em>find <span class="math notranslate nohighlight">\((\mathbf{u}, p)\in\mathcal{V}\times\mathcal{Q}\)</span> s.t.</em></p>
+<div class="amsmath math notranslate nohighlight" id="equation-1bc2a626-d644-450c-a09f-ec74893110c8">
+<span class="eqno">(19)<a class="headerlink" href="#equation-1bc2a626-d644-450c-a09f-ec74893110c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_\Omega \left[\left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\right]\cdot \mathbf{v}\,d\Omega+\int_\Omega \nu\nabla \mathbf{u}\cdot \nabla\mathbf{v}\,d\Omega -\int_\Omega p \nabla\cdot \mathbf{v}\,d\Omega - \int_\Omega q \nabla\cdot \mathbf{u}\,d\Omega = \int_{\Gamma_N} g\mathbf{n}\cdot \mathbf{v}\,d\sigma \qquad \forall (\mathbf{v}, q)\in\mathcal{V}_0\times\mathcal{Q}
+\end{equation}\]</div>
+<div class="section" id="derivation-of-the-linear-system">
+<h2>Derivation of the linear system<a class="headerlink" href="#derivation-of-the-linear-system" title="Permalink to this headline">#</a></h2>
+<p>When the finite dimensional spaces are introduced an important remark should be made. The Galerkin problem has a stable solution <span class="math notranslate nohighlight">\((\mathbf{u}_h,p_h)\)</span> if the finite dimensional spaces are <em>inf-sup</em> compatible. In fact, there exists a connection between the finite dimensional functional space of velocity and pressure referred to as the Taylor-Hood compatible spaces.
+In order to have a stable solution <span id="id1">[<a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">2</a>]</span>, the most common couple is given by parabolic FE <span class="math notranslate nohighlight">\(P2\)</span> for the velocity and linear finite element for pressure <span class="math notranslate nohighlight">\(P1\)</span>.</p>
+<p>Let us consider the finite dimensional representation of the spaces (using Taylor-Hood elements), the correspondent non-linear system of equations results in</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c4439a8d-0f4a-4d6d-ad02-a81c2001f115">
+<span class="eqno">(20)<a class="headerlink" href="#equation-c4439a8d-0f4a-4d6d-ad02-a81c2001f115" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\left[
+\begin{array}{cc}
+A+C(\mathbf{U}) &amp; B^T \\ B &amp; 0
+\end{array}
+\right]\cdot
+\left[
+\begin{array}{c}
+\mathbf{U} \\ \mathbf{P}
+\end{array}
+\right] = 
+\left[
+\begin{array}{c}
+\mathbf{F} \\ \mathbf{0}
+\end{array}
+\right]
+\end{equation}\]</div>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>

@@ -460,7 +460,7 @@ title="Print to PDF"
 <p>This notebook implements a steady incompressible Navier-Stokes solver + energy equation for the buoyant cavity problem.</p>
 <p>The problem is strong form reads:</p>
 <div class="amsmath math notranslate nohighlight" id="equation-8aef3ad1-2f9b-4433-a69f-5c80d226bdc1">
-<span class="eqno">(30)<a class="headerlink" href="#equation-8aef3ad1-2f9b-4433-a69f-5c80d226bdc1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(32)<a class="headerlink" href="#equation-8aef3ad1-2f9b-4433-a69f-5c80d226bdc1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \nabla \cdot \mathbf{u} =0&amp; in\;\Omega\\
@@ -506,7 +506,7 @@ title="Print to PDF"
 </div>
 <p>The problem we want to face is non-linear, whose weak formulation reads:</p>
 <div class="amsmath math notranslate nohighlight" id="equation-442e6a86-2b32-4b91-be25-55942ddee4d0">
-<span class="eqno">(31)<a class="headerlink" href="#equation-442e6a86-2b32-4b91-be25-55942ddee4d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<span class="eqno">(33)<a class="headerlink" href="#equation-442e6a86-2b32-4b91-be25-55942ddee4d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega - \beta\int_\Omega(T-T_{ref})\mathbf{g}\cdot \mathbf{v}\,d\Omega + \int_\Omega \mathbf{u}\cdot \nabla T \, \phi\,d\Omega+\int_\Omega \alpha\nabla T \cdot \nabla\phi\,d\Omega=0
 \end{equation}\]</div>
 <div class="cell docutils container">
