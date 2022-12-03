@@ -466,8 +466,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="steady-stokes">
 <h1>Steady Stokes<a class="headerlink" href="#steady-stokes" title="Permalink to this headline">#</a></h1>
 <p>The Stokes equations describes the flows of incompressible viscous fluid when the importance of inertia is low with respect to viscous forces</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f6f37094-15df-4ca6-bc46-b52b582ca457">
-<span class="eqno">(11)<a class="headerlink" href="#equation-f6f37094-15df-4ca6-bc46-b52b582ca457" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-783fdad0-e68f-463f-8195-dc7cbbc93a17">
+<span class="eqno">(11)<a class="headerlink" href="#equation-783fdad0-e68f-463f-8195-dc7cbbc93a17" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         \nu\Delta \mathbf{u}-\nabla p = 0 &amp; \mbox{in }\Omega\\
@@ -477,8 +477,7 @@ title="Print to PDF"
     \end{array}
 \right.
 \end{equation}\]</div>
-<p>This problem has a saddle point structure, making its numerical solution non-trivial. Moreover, there exists a connection between the finite dimensional functional space of velocity and pressure referred to as the Taylor-Hood <em>inf-sup</em> compatible spaces.</p>
-<p>In order to have a stable solution <span id="id1">[<a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">2</a>]</span>, the most common couple is given by parabolic FE <span class="math notranslate nohighlight">\(P2\)</span> for the velocity and linear finite element for pressure <span class="math notranslate nohighlight">\(P1\)</span>.</p>
+<p>This problem has a saddle point structure, making its numerical solution non-trivial.</p>
 <p>Before entering into the details of the Galerkin problem let us derive the weak formulation.
 Let <span class="math notranslate nohighlight">\(\mathcal{V}\subset[\mathcal{H}^1]^d,\; \mathcal{V}_0[\subset\mathcal{H}^1]^d\)</span> the velocity trial and test spaces defined as</p>
 <div class="math notranslate nohighlight">
@@ -497,15 +496,17 @@ Let <span class="math notranslate nohighlight">\(\mathcal{V}\subset[\mathcal{H}^
 \int_\Omega q \nabla\cdot \mathbf{u}\,d\Omega=0
 \]</div>
 <p>Imposing the boundary conditions, the weak formulation reads: <em>find <span class="math notranslate nohighlight">\((\mathbf{u}, p)\in\mathcal{V}\times\mathcal{Q}\)</span> s.t.</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-655a4edd-fce7-45ca-b9f9-a2269645d545">
-<span class="eqno">(12)<a class="headerlink" href="#equation-655a4edd-fce7-45ca-b9f9-a2269645d545" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-42a56dbb-87f3-45ff-b986-320c40e44a66">
+<span class="eqno">(12)<a class="headerlink" href="#equation-42a56dbb-87f3-45ff-b986-320c40e44a66" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nu\nabla \mathbf{u}\cdot \nabla\mathbf{v}\,d\Omega -\int_\Omega p \nabla\cdot \mathbf{v}\,d\Omega - \int_\Omega q \nabla\cdot \mathbf{u}\,d\Omega =  \int_{\Gamma_N} g\mathbf{n}\cdot \mathbf{v}\,d\sigma \qquad \forall (\mathbf{v}, q)\in\mathcal{V}_0\times\mathcal{Q}
 \end{equation}\]</div>
 <div class="section" id="derivation-of-the-linear-system">
 <h2>Derivation of the linear system<a class="headerlink" href="#derivation-of-the-linear-system" title="Permalink to this headline">#</a></h2>
+<p>When the finite dimensional spaces are introduced an important remark should be made. The Galerkin problem has a stable solution <span class="math notranslate nohighlight">\((\mathbf{u}_h,p_h)\)</span> if the finite dimensional spaces are <em>inf-sup</em> compatible. In fact, there exists a connection between the finite dimensional functional space of velocity and pressure referred to as the Taylor-Hood compatible spaces.
+In order to have a stable solution <span id="id1">[<a class="reference internal" href="../biblio.html#id3" title="Alfio Quarteroni. Numerical Models for Differential Problems. Springer, Cham, iii edition, 2016.">2</a>]</span>, the most common couple is given by parabolic FE <span class="math notranslate nohighlight">\(P2\)</span> for the velocity and linear finite element for pressure <span class="math notranslate nohighlight">\(P1\)</span>.</p>
 <p>Let us consider the finite dimensional representation of the spaces (using Taylor-Hood elements), the correspondent linear system results in</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3f4ce237-88fb-4bb4-8205-8850f28d8ddc">
-<span class="eqno">(13)<a class="headerlink" href="#equation-3f4ce237-88fb-4bb4-8205-8850f28d8ddc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0fc81ded-70c8-44ca-b95e-9968816ac082">
+<span class="eqno">(13)<a class="headerlink" href="#equation-0fc81ded-70c8-44ca-b95e-9968816ac082" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left[
 \begin{array}{cc}
 A &amp; B^T \\ B &amp; 0

@@ -11,9 +11,7 @@ The Stokes equations describes the flows of incompressible viscous fluid when th
     \end{array}
 \right.
 \end{equation}
-This problem has a saddle point structure, making its numerical solution non-trivial. Moreover, there exists a connection between the finite dimensional functional space of velocity and pressure referred to as the Taylor-Hood *inf-sup* compatible spaces. 
-
-In order to have a stable solution {cite}`quarteroni_2016`, the most common couple is given by parabolic FE $P2$ for the velocity and linear finite element for pressure $P1$.
+This problem has a saddle point structure, making its numerical solution non-trivial.
 
 Before entering into the details of the Galerkin problem let us derive the weak formulation.
 Let $\mathcal{V}\subset[\mathcal{H}^1]^d,\; \mathcal{V}_0[\subset\mathcal{H}^1]^d$ the velocity trial and test spaces defined as
@@ -40,6 +38,9 @@ Imposing the boundary conditions, the weak formulation reads: *find $(\mathbf{u}
 \end{equation}
 
 ## Derivation of the linear system
+When the finite dimensional spaces are introduced an important remark should be made. The Galerkin problem has a stable solution $(\mathbf{u}_h,p_h)$ if the finite dimensional spaces are *inf-sup* compatible. In fact, there exists a connection between the finite dimensional functional space of velocity and pressure referred to as the Taylor-Hood compatible spaces.
+In order to have a stable solution {cite}`quarteroni_2016`, the most common couple is given by parabolic FE $P2$ for the velocity and linear finite element for pressure $P1$.
+
 Let us consider the finite dimensional representation of the spaces (using Taylor-Hood elements), the correspondent linear system results in
 \begin{equation}
 \left[
