@@ -212,8 +212,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="channel_unsteadyNS.html">
-     Implementation
+    <a class="reference internal" href="flowCyl_unsteadyNS.html">
+     Laminar Flow over cylinder (2D)
     </a>
    </li>
   </ul>
@@ -459,8 +459,8 @@ title="Print to PDF"
 <h1>Buoyant Cavity (2D)<a class="headerlink" href="#buoyant-cavity-2d" title="Permalink to this headline">#</a></h1>
 <p>This notebook implements a steady incompressible Navier-Stokes solver + energy equation for the buoyant cavity problem.</p>
 <p>The problem is strong form reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-507184b9-d20e-467c-9090-c35a950b197c">
-<span class="eqno">(23)<a class="headerlink" href="#equation-507184b9-d20e-467c-9090-c35a950b197c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8aef3ad1-2f9b-4433-a69f-5c80d226bdc1">
+<span class="eqno">(30)<a class="headerlink" href="#equation-8aef3ad1-2f9b-4433-a69f-5c80d226bdc1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \nabla \cdot \mathbf{u} =0&amp; in\;\Omega\\
@@ -505,8 +505,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>The problem we want to face is non-linear, whose weak formulation reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4b2296a3-2e36-4563-a643-8883badbd02b">
-<span class="eqno">(24)<a class="headerlink" href="#equation-4b2296a3-2e36-4563-a643-8883badbd02b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-442e6a86-2b32-4b91-be25-55942ddee4d0">
+<span class="eqno">(31)<a class="headerlink" href="#equation-442e6a86-2b32-4b91-be25-55942ddee4d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega - \beta\int_\Omega(T-T_{ref})\mathbf{g}\cdot \mathbf{v}\,d\Omega + \int_\Omega \mathbf{u}\cdot \nabla T \, \phi\,d\Omega+\int_\Omega \alpha\nabla T \cdot \nabla\phi\,d\Omega=0
 \end{equation}\]</div>
 <div class="cell docutils container">

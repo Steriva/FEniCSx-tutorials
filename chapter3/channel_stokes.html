@@ -212,8 +212,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="channel_unsteadyNS.html">
-     Implementation
+    <a class="reference internal" href="flowCyl_unsteadyNS.html">
+     Laminar Flow over cylinder (2D)
     </a>
    </li>
   </ul>
@@ -505,8 +505,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="stokes-problem-channel-flow">
 <h1>Stokes problem - Channel Flow<a class="headerlink" href="#stokes-problem-channel-flow" title="Permalink to this headline">#</a></h1>
 <p>This notebook implements a block FE solution of the following problem</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bc730412-e7f3-4bb8-9de4-6bebf4fcaaa6">
-<span class="eqno">(14)<a class="headerlink" href="#equation-bc730412-e7f3-4bb8-9de4-6bebf4fcaaa6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d16109a4-e409-49f9-996f-ef5ff3ad83b4">
+<span class="eqno">(14)<a class="headerlink" href="#equation-d16109a4-e409-49f9-996f-ef5ff3ad83b4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         -\mu\Delta \mathbf{u} + \nabla p =0 &amp; in \; \Omega\\
@@ -589,8 +589,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>Let us define the functional spaces</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a0fdfa52-be46-42bf-83b2-a29b2972b618">
-<span class="eqno">(15)<a class="headerlink" href="#equation-a0fdfa52-be46-42bf-83b2-a29b2972b618" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c9e1cc4d-4568-4b64-960f-44ef4a04c24b">
+<span class="eqno">(15)<a class="headerlink" href="#equation-c9e1cc4d-4568-4b64-960f-44ef4a04c24b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{split}
 \mathcal{V} &amp;= \left\{\mathbf{v}\in\left[\mathcal{H}^1(\Omega)\right]^2:\,
                                                                         \left.\mathbf{v}\right|_{\Gamma_{in}} = \mathbf{u}_{in}\;,\;
@@ -601,14 +601,14 @@ title="Print to PDF"
 \end{split}
 \end{equation}\]</div>
 <p>so that, the weak formulation reads</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7a8d9325-de2e-47cf-b2fc-364c8c10c72f">
-<span class="eqno">(16)<a class="headerlink" href="#equation-7a8d9325-de2e-47cf-b2fc-364c8c10c72f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-45c39a7b-725a-4dcc-85f2-95f082e248c4">
+<span class="eqno">(16)<a class="headerlink" href="#equation-45c39a7b-725a-4dcc-85f2-95f082e248c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega\mu\nabla\mathbf{u}\cdot\mathbf{v}\,d\Omega -\int_\Omega p \,\nabla\cdot \mathbf{v}\,d\Omega +
 \int_\Omega q \,\nabla\cdot \mathbf{u} = 0\qquad \forall \mathbf{v}\in\mathcal{V}_0, q\in\mathcal{Q}
 \end{equation}\]</div>
 <p>which results in the following saddle point system</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2d6abd52-5985-4b8b-a0e8-05e74156ab54">
-<span class="eqno">(17)<a class="headerlink" href="#equation-2d6abd52-5985-4b8b-a0e8-05e74156ab54" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a2806dd5-5bcf-416b-9cca-7bb452543dd0">
+<span class="eqno">(17)<a class="headerlink" href="#equation-a2806dd5-5bcf-416b-9cca-7bb452543dd0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left[
 \begin{array}{ll}
 A &amp; B^T \\

@@ -212,8 +212,8 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="channel_unsteadyNS.html">
-     Implementation
+    <a class="reference internal" href="flowCyl_unsteadyNS.html">
+     Laminar Flow over cylinder (2D)
     </a>
    </li>
   </ul>
@@ -466,8 +466,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="steady-stokes">
 <h1>Steady Stokes<a class="headerlink" href="#steady-stokes" title="Permalink to this headline">#</a></h1>
 <p>The Stokes equations describes the flows of incompressible viscous fluid when the importance of inertia is low with respect to viscous forces</p>
-<div class="amsmath math notranslate nohighlight" id="equation-966fd54e-2b0a-4f5f-b7ea-b010ee87c9c5">
-<span class="eqno">(11)<a class="headerlink" href="#equation-966fd54e-2b0a-4f5f-b7ea-b010ee87c9c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f6f37094-15df-4ca6-bc46-b52b582ca457">
+<span class="eqno">(11)<a class="headerlink" href="#equation-f6f37094-15df-4ca6-bc46-b52b582ca457" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         \nu\Delta \mathbf{u}-\nabla p = 0 &amp; \mbox{in }\Omega\\
@@ -497,15 +497,15 @@ Let <span class="math notranslate nohighlight">\(\mathcal{V}\subset[\mathcal{H}^
 \int_\Omega q \nabla\cdot \mathbf{u}\,d\Omega=0
 \]</div>
 <p>Imposing the boundary conditions, the weak formulation reads: <em>find <span class="math notranslate nohighlight">\((\mathbf{u}, p)\in\mathcal{V}\times\mathcal{Q}\)</span> s.t.</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-49c40729-8091-4e92-9c26-104a85317b50">
-<span class="eqno">(12)<a class="headerlink" href="#equation-49c40729-8091-4e92-9c26-104a85317b50" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-655a4edd-fce7-45ca-b9f9-a2269645d545">
+<span class="eqno">(12)<a class="headerlink" href="#equation-655a4edd-fce7-45ca-b9f9-a2269645d545" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \nu\nabla \mathbf{u}\cdot \nabla\mathbf{v}\,d\Omega -\int_\Omega p \nabla\cdot \mathbf{v}\,d\Omega - \int_\Omega q \nabla\cdot \mathbf{u}\,d\Omega =  \int_{\Gamma_N} g\mathbf{n}\cdot \mathbf{v}\,d\sigma \qquad \forall (\mathbf{v}, q)\in\mathcal{V}_0\times\mathcal{Q}
 \end{equation}\]</div>
 <div class="section" id="derivation-of-the-linear-system">
 <h2>Derivation of the linear system<a class="headerlink" href="#derivation-of-the-linear-system" title="Permalink to this headline">#</a></h2>
 <p>Let us consider the finite dimensional representation of the spaces (using Taylor-Hood elements), the correspondent linear system results in</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9131d2b1-3316-48f6-a1a3-5b524c0657e4">
-<span class="eqno">(13)<a class="headerlink" href="#equation-9131d2b1-3316-48f6-a1a3-5b524c0657e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3f4ce237-88fb-4bb4-8205-8850f28d8ddc">
+<span class="eqno">(13)<a class="headerlink" href="#equation-3f4ce237-88fb-4bb4-8205-8850f28d8ddc" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left[
 \begin{array}{cc}
 A &amp; B^T \\ B &amp; 0
