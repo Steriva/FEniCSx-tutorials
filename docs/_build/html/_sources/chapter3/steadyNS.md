@@ -59,3 +59,20 @@ A+C(\mathbf{U}) & B^T \\ B & 0
 \end{array}
 \right]
 \end{equation}
+
+Different techniques can be used to linearised this system and get a solution. The treatment of the non-linearity is an important concern in the solution of the Navier-Stokes equations. Let us define the Reynolds number
+
+$$
+Re = \frac{\mbox{Inertia forces}}{\mbox{Viscous forces}}=\frac{U_0\cdot D_h}{\nu}
+$$
+given $U_0$ a characteristic velocity, $D_h$ is the hydraulics diameter and it represents a characteristic length and $\nu$ is the kinematic viscosity. This dimensionless quantity measures the importance of inertia forces with respect of viscous forces, when the latter is stronger the flow is said to be **laminar** whereas as the numerator increases advection becomes dominant and the flow becomes **turbulent**.
+
+A steady solution exists only for values of $Re<3000$, otherwise turbulence makes the flow unsteady.
+
+```{prf:remark}
+:label: my-remark
+
+A steady solution can be obtained when introducing the Reynolds-Averaged Navier-Stokes (RANS) equations, in which turbulence is completely modelled {cite}`davidson2015turbulence`.
+
+In this book, only laminar flow is considered.
+```
