@@ -27,7 +27,7 @@ parts:
         - file: chapter3/Cavity2D.ipynb
       - file: chapter3/unsteadyNS
         sections:
-        - file: chapter3/channel_unsteadyNS.ipynb
+        - file: chapter3/flowCyl_unsteadyNS.ipynb
       - file: chapter3/steadyBoussinesq
         sections:
         - file: chapter3/buoyantCavity.ipynb

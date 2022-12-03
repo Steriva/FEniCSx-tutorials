@@ -1,0 +1,891 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laminar Flow over cylinder (2D) &#8212; Tutorials for FEniCSx</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Steady Navier-Stokes + energy equation (boussinesq)" href="steadyBoussinesq.html" />
+    <link rel="prev" title="Unsteady Navier-Stokes" href="unsteadyNS.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Tutorials for FEniCSx</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General Overview of Finite Elements
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/InstallationNotes.html">
+   Installation notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/FunctionalAnalysis.html">
+   Elements of Functional Analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../chapter1/WeakFormulations.html">
+   Weak Formulations
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Basic Tutorials
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../chapter2/Poisson.html">
+   Poisson
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../chapter2/ImplementationPoisson.html">
+     Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Fluid Dynamics
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="steadyStokes.html">
+   Steady Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="channel_stokes.html">
+     Stokes problem - Channel Flow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="steadyNS.html">
+   Steady Navier-Stokes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Cavity2D.html">
+     Cavity (2D)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="unsteadyNS.html">
+   Unsteady Navier-Stokes
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Laminar Flow over cylinder (2D)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="steadyBoussinesq.html">
+   Steady Navier-Stokes + energy equation (boussinesq)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="buoyantCavity.html">
+     Buoyant Cavity (2D)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../biblio.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/chapter3/flowCyl_unsteadyNS.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter3/flowCyl_unsteadyNS.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapter3/flowCyl_unsteadyNS.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predictor-ns-momentum">
+   Predictor: NS momentum
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pressure-projection">
+   Pressure projection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correction">
+   Correction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-loop">
+   Time loop
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Laminar Flow over cylinder (2D)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predictor-ns-momentum">
+   Predictor: NS momentum
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pressure-projection">
+   Pressure projection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#correction">
+   Correction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-loop">
+   Time loop
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="laminar-flow-over-cylinder-2d">
+<h1>Laminar Flow over cylinder (2D)<a class="headerlink" href="#laminar-flow-over-cylinder-2d" title="Permalink to this headline">#</a></h1>
+<p>This notebook implements an unsteady incompressible Navier-Stokes solver for the flow over a cylinder (the problem is based on the <a class="reference external" href="https://jorgensd.github.io/dolfinx-tutorial/chapter2/ns_code2.html">tutorial of FEniCSx</a>, that is the DFG 2D benchmark).</p>
+<p>The problem is strong form reads:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2bc94ce6-fb8e-478a-ad48-52b1548cfeb9">
+<span class="eqno">(22)<a class="headerlink" href="#equation-2bc94ce6-fb8e-478a-ad48-52b1548cfeb9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\left\{
+\begin{array}{ll}
+    \nabla \cdot \mathbf{u} = 0&amp; in\;\Omega\\
+    \displaystyle \frac{\partial \mathbf{u}}{\partial t}+\left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p &amp; in\;\Omega\\ &amp; \\
+    \left. \mathbf{u}\right|_{t=0}=\mathbf{0} &amp; in\;\Omega\\ &amp; \\
+    \mathbf{u} = \frac{4U(t)\,(y-0.2)\cdot(0.21-y)}{0.41^2}\mathbf{i} &amp; on\;\Gamma_{in}\\
+    \mathbf{u} = \mathbf{0} &amp; on\;\Gamma_w\\
+    \left(\nu\nabla \mathbf{u}-p\mathbb{I}\right)\cdot \mathbf{n}=\mathbf{g} &amp; on \;\Gamma_{out}
+\end{array}
+\right.
+\end{equation}\]</div>
+<p>in which <span class="math notranslate nohighlight">\(\nu = 1e-4\)</span>, <span class="math notranslate nohighlight">\(\mathbf{g} = \mathbf{0}\)</span> and <span class="math notranslate nohighlight">\(U(t) = 1.5 \sin\left(\frac{\pi t}{8}\right)\)</span> or <span class="math notranslate nohighlight">\(U(t) = \displaystyle\frac{1}{1+e^{-t}}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Mesh generation</span>
+<span class="kn">import</span> <span class="nn">dolfinx</span>
+<span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+<span class="kn">from</span> <span class="nn">dolfinx</span> <span class="kn">import</span> <span class="n">mesh</span>
+<span class="kn">from</span> <span class="nn">dolfinx.io</span> <span class="kn">import</span> <span class="n">gmshio</span><span class="p">,</span> <span class="n">XDMFFile</span>
+
+<span class="n">gdim</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">domain</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">ft</span> <span class="o">=</span> <span class="n">gmshio</span><span class="o">.</span><span class="n">read_from_msh</span><span class="p">(</span><span class="s2">&quot;flowCylinder.msh&quot;</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span><span class="p">,</span> <span class="n">gdim</span> <span class="o">=</span> <span class="n">gdim</span><span class="p">)</span>
+
+<span class="n">fdim</span> <span class="o">=</span> <span class="n">gdim</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="n">inl_marker</span>  <span class="o">=</span> <span class="mi">10</span>
+<span class="n">wall_marker</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">sym_marker</span>  <span class="o">=</span> <span class="mi">30</span>
+<span class="n">out_marker</span>  <span class="o">=</span> <span class="mi">40</span>
+
+<span class="c1"># Define the functional space</span>
+<span class="kn">from</span> <span class="nn">dolfinx</span> <span class="kn">import</span> <span class="n">fem</span>
+<span class="kn">from</span> <span class="nn">dolfinx.fem</span> <span class="kn">import</span> <span class="n">Function</span><span class="p">,</span> <span class="n">FunctionSpace</span><span class="p">,</span> <span class="n">dirichletbc</span><span class="p">,</span> <span class="n">locate_dofs_topological</span><span class="p">,</span> <span class="n">form</span>
+<span class="kn">import</span> <span class="nn">ufl</span>
+<span class="kn">from</span> <span class="nn">ufl</span> <span class="kn">import</span> <span class="n">grad</span><span class="p">,</span> <span class="n">div</span><span class="p">,</span> <span class="n">nabla_grad</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">inner</span><span class="p">,</span> <span class="n">dot</span><span class="p">,</span> <span class="n">ds</span>
+<span class="kn">from</span> <span class="nn">petsc4py</span> <span class="kn">import</span> <span class="n">PETSc</span>
+
+
+<span class="n">P2</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">VectorElement</span><span class="p">(</span><span class="s2">&quot;Lagrange&quot;</span><span class="p">,</span> <span class="n">domain</span><span class="o">.</span><span class="n">ufl_cell</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">P2</span><span class="p">)</span>
+<span class="n">P1</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">FiniteElement</span><span class="p">(</span><span class="s2">&quot;Lagrange&quot;</span><span class="p">,</span> <span class="n">domain</span><span class="o">.</span><span class="n">ufl_cell</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">FunctionSpace</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">P1</span><span class="p">)</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TrialFunction</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TestFunction</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">uOld</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">uTilde</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">u_sol</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TrialFunction</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">ufl</span><span class="o">.</span><span class="n">TestFunction</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="n">pOld</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="n">deltaP</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="n">p_sol</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+
+<span class="c1"># U = lambda t: 1.5 * np.sin(np.pi * t / 8.) </span>
+<span class="n">U</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>
+<span class="n">nu</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">))</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">2e-3</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Define the BC</span>
+
+<span class="c1">## Inlet: parabolic velocity</span>
+<span class="k">class</span> <span class="nc">InletVelocity</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">U</span> <span class="o">=</span> <span class="n">U</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">gdim</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">dtype</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">)</span>
+        <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.21</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">0.41</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">values</span>
+
+<span class="n">inlet_velocity</span> <span class="o">=</span> <span class="n">InletVelocity</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">in_velocity</span> <span class="o">=</span> <span class="n">Function</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">in_velocity</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">inlet_velocity</span><span class="p">)</span>
+<span class="n">bc_in</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="n">in_velocity</span><span class="p">,</span> <span class="n">locate_dofs_topological</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">fdim</span><span class="p">,</span> <span class="n">ft</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">inl_marker</span><span class="p">)))</span>
+
+<span class="c1">## Walls: no slip</span>
+<span class="n">u_nonslip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">0</span><span class="p">,)</span> <span class="o">*</span> <span class="n">domain</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">)</span>
+<span class="n">bc_w</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="n">u_nonslip</span><span class="p">,</span> <span class="n">locate_dofs_topological</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">fdim</span><span class="p">,</span> <span class="n">ft</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">wall_marker</span><span class="p">)),</span> <span class="n">V</span><span class="p">)</span>
+
+<span class="c1">## Symm: free slip</span>
+<span class="n">bc_sym</span> <span class="o">=</span> <span class="n">dirichletbc</span><span class="p">(</span><span class="n">u_nonslip</span><span class="p">,</span> <span class="n">locate_dofs_topological</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">fdim</span><span class="p">,</span> <span class="n">ft</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">sym_marker</span><span class="p">)),</span> <span class="n">V</span><span class="p">)</span>
+
+<span class="n">bc_u</span> <span class="o">=</span> <span class="p">[</span><span class="n">bc_w</span><span class="p">,</span> <span class="n">bc_sym</span><span class="p">,</span> <span class="n">bc_in</span><span class="p">]</span>
+
+<span class="c1">## Out</span>
+<span class="n">bc_p</span> <span class="o">=</span> <span class="p">[</span><span class="n">dirichletbc</span><span class="p">(</span><span class="n">PETSc</span><span class="o">.</span><span class="n">ScalarType</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">locate_dofs_topological</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">fdim</span><span class="p">,</span> <span class="n">ft</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">out_marker</span><span class="p">)),</span> <span class="n">Q</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="predictor-ns-momentum">
+<h2>Predictor: NS momentum<a class="headerlink" href="#predictor-ns-momentum" title="Permalink to this headline">#</a></h2>
+<p>We can define the variational formulations for the time advancement loop. Let’s start with the projection step</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1f25a6aa-40ba-4b34-b370-c99b04b73d94">
+<span class="eqno">(23)<a class="headerlink" href="#equation-1f25a6aa-40ba-4b34-b370-c99b04b73d94" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\left\{
+\begin{array}{ll}
+    \displaystyle \frac{\tilde{\mathbf{u}}-\mathbf{n}^n}{\Delta t}+\left(\mathbf{u}^n\cdot \nabla\right)\tilde{\mathbf{u}}= \frac{1}{Re}\Delta \tilde{\mathbf{u}}-\nabla p^n &amp; in\;\Omega\\ &amp; \\
+    \tilde{\mathbf{u}} = (1-y^2)\mathbf{i} &amp; on\;\Gamma_{in}\\
+    \tilde{\mathbf{u}} = \mathbf{0} &amp; on\;\Gamma_w\\
+    \frac{1}{Re}\nabla\tilde{\mathbf{u}}\cdot \mathbf{n}=\mathbf{g} &amp; on \;\Gamma_{out}
+\end{array}
+\right.
+\end{equation}\]</div>
+<p>whose weak formulation reads</p>
+<div class="amsmath math notranslate nohighlight" id="equation-bd5ceba0-d921-4537-8423-c2464a5a6935">
+<span class="eqno">(24)<a class="headerlink" href="#equation-bd5ceba0-d921-4537-8423-c2464a5a6935" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_\Omega \tilde{\mathbf{u}}\cdot \mathbf{v}\,d\Omega + \Delta t \int_\Omega \left(\mathbf{u}^n\cdot \nabla\right)\tilde{\mathbf{u}}\cdot \mathbf{v}\,d\Omega + \frac{ \Delta t}{Re} \int_\Omega\nabla \tilde{\mathbf{u}}\cdot \nabla \mathbf{v}\,d\Omega =
+\int_\Omega {\mathbf{u}}^n\cdot \mathbf{v}\,d\Omega + \Delta t \int_{\Gamma_{out}}g\mathbf{n}\cdot \mathbf{v}\,d\sigma -  \Delta t\int_\Omega \nabla p^n\cdot \mathbf{v}\,d\Omega 
+\end{equation}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NS_a</span> <span class="o">=</span> <span class="n">form</span><span class="p">(</span> <span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> 
+              <span class="n">dt</span> <span class="o">*</span> <span class="n">inner</span><span class="p">(</span><span class="n">dot</span><span class="p">(</span><span class="n">uOld</span><span class="p">,</span> <span class="n">nabla_grad</span><span class="p">(</span><span class="n">u</span><span class="p">)),</span> <span class="n">v</span><span class="p">)</span> <span class="o">+</span> 
+              <span class="n">dt</span> <span class="o">*</span> <span class="n">inner</span><span class="p">(</span><span class="n">nu</span> <span class="o">*</span> <span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">grad</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span> <span class="o">*</span> <span class="n">dx</span> <span class="p">)</span>
+<span class="n">NS_L</span> <span class="o">=</span> <span class="n">form</span><span class="p">(</span> <span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="n">uOld</span> <span class="o">-</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">grad</span><span class="p">(</span><span class="n">pOld</span><span class="p">),</span> <span class="n">v</span><span class="p">))</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+
+<span class="n">NS_A</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">create_matrix</span><span class="p">(</span><span class="n">NS_a</span><span class="p">)</span>
+<span class="n">NS_b</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">create_vector</span><span class="p">(</span><span class="n">NS_L</span><span class="p">)</span>
+
+<span class="n">solver1</span> <span class="o">=</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">KSP</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">comm</span><span class="p">)</span>
+<span class="n">solver1</span><span class="o">.</span><span class="n">setOperators</span><span class="p">(</span><span class="n">NS_A</span><span class="p">)</span>
+<span class="n">solver1</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">PETSc</span><span class="o">.</span><span class="n">KSP</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">BCGS</span><span class="p">)</span>
+<span class="n">solver1</span><span class="o">.</span><span class="n">getPC</span><span class="p">()</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">PETSc</span><span class="o">.</span><span class="n">PC</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">JACOBI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="pressure-projection">
+<h2>Pressure projection<a class="headerlink" href="#pressure-projection" title="Permalink to this headline">#</a></h2>
+<p>The projection step consists in a Poisson problem, i.e.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4376ff86-38f4-4a48-889d-f00bb2ae9a2a">
+<span class="eqno">(25)<a class="headerlink" href="#equation-4376ff86-38f4-4a48-889d-f00bb2ae9a2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\left\{
+    \begin{array}{ll}
+        -\Delta \delta p=-\frac{1}{\Delta t}\nabla\cdot \tilde{\mathbf{u}} &amp; in\;\Omega\\
+        \delta p = 0 &amp; on\;\Gamma_{out}\\
+        \nabla\delta p\cdot \mathbf{n}=0&amp; on\;\partial\Omega\setminus \Gamma_{out}
+    \end{array}
+\right.
+\end{equation}\]</div>
+<p>whose weak formulation reads</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ef07914b-a264-4da8-9e76-891d5048a111">
+<span class="eqno">(26)<a class="headerlink" href="#equation-ef07914b-a264-4da8-9e76-891d5048a111" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_\Omega \nabla \delta p\cdot \nabla q\,d\Omega = -\frac{1}{\Delta t}\int_\Omega q\nabla \cdot \tilde{\mathbf{u}}\,d\Omega
+\qquad \forall q\in\mathcal{Q}
+\end{equation}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Poisson_a</span> <span class="o">=</span> <span class="n">form</span><span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="n">grad</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">grad</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="n">Poisson_L</span> <span class="o">=</span> <span class="n">form</span><span class="p">(</span><span class="o">-</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">inner</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">uTilde</span><span class="p">),</span> <span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+
+<span class="n">Poisson_A</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">assemble_matrix</span><span class="p">(</span><span class="n">Poisson_a</span><span class="p">,</span> <span class="n">bcs</span> <span class="o">=</span> <span class="n">bc_p</span><span class="p">)</span>
+<span class="n">Poisson_A</span><span class="o">.</span><span class="n">assemble</span><span class="p">()</span>
+<span class="n">Poisson_b</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">create_vector</span><span class="p">(</span><span class="n">Poisson_L</span><span class="p">)</span>
+
+<span class="n">solver2</span> <span class="o">=</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">KSP</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">comm</span><span class="p">)</span>
+<span class="n">solver2</span><span class="o">.</span><span class="n">setOperators</span><span class="p">(</span><span class="n">Poisson_A</span><span class="p">)</span>
+<span class="n">solver2</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">PETSc</span><span class="o">.</span><span class="n">KSP</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">CG</span><span class="p">)</span>
+<span class="n">solver2</span><span class="o">.</span><span class="n">getPC</span><span class="p">()</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">PETSc</span><span class="o">.</span><span class="n">PC</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SOR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="correction">
+<h2>Correction<a class="headerlink" href="#correction" title="Permalink to this headline">#</a></h2>
+<p>Then, a third auxiliary variational problem is defined to update the velocity</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ea3886d7-b9b6-48df-9a02-2d1b263b7356">
+<span class="eqno">(27)<a class="headerlink" href="#equation-ea3886d7-b9b6-48df-9a02-2d1b263b7356" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\int_\Omega \mathbf{u}^{n+1} \cdot \mathbf{v} \,d\Omega= \int_\Omega\left( \tilde{\mathbf{u}}-\Delta t\nabla\delta p\right) \cdot \mathbf{v} \,d\Omega
+\end{equation}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">update_a</span> <span class="o">=</span> <span class="n">form</span><span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="n">update_L</span> <span class="o">=</span> <span class="n">form</span><span class="p">(</span><span class="n">inner</span><span class="p">(</span><span class="n">uTilde</span> <span class="o">-</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">grad</span><span class="p">(</span><span class="n">deltaP</span><span class="p">),</span> <span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+
+<span class="n">update_A</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">assemble_matrix</span><span class="p">(</span><span class="n">update_a</span><span class="p">)</span>
+<span class="n">update_A</span><span class="o">.</span><span class="n">assemble</span><span class="p">()</span>
+<span class="n">update_b</span> <span class="o">=</span> <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">create_vector</span><span class="p">(</span><span class="n">update_L</span><span class="p">)</span>
+
+<span class="n">solver3</span> <span class="o">=</span> <span class="n">PETSc</span><span class="o">.</span><span class="n">KSP</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">comm</span><span class="p">)</span>
+<span class="n">solver3</span><span class="o">.</span><span class="n">setOperators</span><span class="p">(</span><span class="n">update_A</span><span class="p">)</span>
+<span class="n">solver3</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">PETSc</span><span class="o">.</span><span class="n">KSP</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">CG</span><span class="p">)</span>
+<span class="n">solver3</span><span class="o">.</span><span class="n">getPC</span><span class="p">()</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">PETSc</span><span class="o">.</span><span class="n">PC</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">SOR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The pressure is also updated as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c8f839ed-798b-4fbd-8977-90119ab2302e">
+<span class="eqno">(28)<a class="headerlink" href="#equation-c8f839ed-798b-4fbd-8977-90119ab2302e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+p^{n+1}=p^n+\delta p
+\end{equation}\]</div>
+</div>
+<div class="section" id="time-loop">
+<h2>Time loop<a class="headerlink" href="#time-loop" title="Permalink to this headline">#</a></h2>
+<p>Finally, the time loop can be implemented.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">u_xdmf</span> <span class="o">=</span> <span class="n">XDMFFile</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">comm</span><span class="p">,</span> <span class="s2">&quot;U.xdmf&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">u_xdmf</span><span class="o">.</span><span class="n">write_mesh</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+<span class="n">u_sol</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;U&quot;</span>
+<span class="n">u_xdmf</span><span class="o">.</span><span class="n">write_function</span><span class="p">(</span><span class="n">u_sol</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="n">p_xdmf</span> <span class="o">=</span> <span class="n">XDMFFile</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">comm</span><span class="p">,</span> <span class="s2">&quot;p.xdmf&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">p_xdmf</span><span class="o">.</span><span class="n">write_mesh</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+<span class="n">p_sol</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;p&quot;</span>
+<span class="n">p_xdmf</span><span class="o">.</span><span class="n">write_function</span><span class="p">(</span><span class="n">p_sol</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="n">kk</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">num_steps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">progress</span> <span class="o">=</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Solving PDE&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">num_steps</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+    <span class="n">progress</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+    <span class="n">inlet_velocity</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span>
+    <span class="n">in_velocity</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">inlet_velocity</span><span class="p">)</span>
+
+    <span class="c1"># Predictor</span>
+    <span class="n">NS_A</span><span class="o">.</span><span class="n">zeroEntries</span><span class="p">()</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">assemble_matrix</span><span class="p">(</span><span class="n">NS_A</span><span class="p">,</span> <span class="n">NS_a</span><span class="p">,</span> <span class="n">bcs</span> <span class="o">=</span> <span class="n">bc_u</span><span class="p">)</span>
+    <span class="n">NS_A</span><span class="o">.</span><span class="n">assemble</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">NS_b</span><span class="o">.</span><span class="n">localForm</span><span class="p">()</span> <span class="k">as</span> <span class="n">loc</span><span class="p">:</span>
+        <span class="n">loc</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">assemble_vector</span><span class="p">(</span><span class="n">NS_b</span><span class="p">,</span> <span class="n">NS_L</span><span class="p">)</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">apply_lifting</span><span class="p">(</span><span class="n">NS_b</span><span class="p">,</span> <span class="p">[</span><span class="n">NS_a</span><span class="p">],</span> <span class="p">[</span><span class="n">bc_u</span><span class="p">])</span>
+    <span class="n">NS_b</span><span class="o">.</span><span class="n">ghostUpdate</span><span class="p">(</span><span class="n">addv</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">InsertMode</span><span class="o">.</span><span class="n">ADD_VALUES</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">ScatterMode</span><span class="o">.</span><span class="n">REVERSE</span><span class="p">)</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">set_bc</span><span class="p">(</span><span class="n">NS_b</span><span class="p">,</span> <span class="n">bc_u</span><span class="p">)</span>
+
+    <span class="n">solver1</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">NS_b</span><span class="p">,</span> <span class="n">uTilde</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+    <span class="n">uTilde</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">scatter_forward</span><span class="p">()</span>
+
+    <span class="c1"># Projection</span>
+    <span class="k">with</span> <span class="n">Poisson_b</span><span class="o">.</span><span class="n">localForm</span><span class="p">()</span> <span class="k">as</span> <span class="n">loc</span><span class="p">:</span>
+        <span class="n">loc</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">assemble_vector</span><span class="p">(</span><span class="n">Poisson_b</span><span class="p">,</span> <span class="n">Poisson_L</span><span class="p">)</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">apply_lifting</span><span class="p">(</span><span class="n">Poisson_b</span><span class="p">,</span> <span class="p">[</span><span class="n">Poisson_a</span><span class="p">],</span> <span class="p">[</span><span class="n">bc_p</span><span class="p">])</span>
+    <span class="n">Poisson_b</span><span class="o">.</span><span class="n">ghostUpdate</span><span class="p">(</span><span class="n">addv</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">InsertMode</span><span class="o">.</span><span class="n">ADD_VALUES</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">ScatterMode</span><span class="o">.</span><span class="n">REVERSE</span><span class="p">)</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">set_bc</span><span class="p">(</span><span class="n">Poisson_b</span><span class="p">,</span> <span class="n">bc_p</span><span class="p">)</span>
+
+    <span class="n">solver2</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Poisson_b</span><span class="p">,</span> <span class="n">deltaP</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+    <span class="n">deltaP</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">scatter_forward</span><span class="p">()</span>
+
+    <span class="c1"># Correction</span>
+    <span class="k">with</span> <span class="n">update_b</span><span class="o">.</span><span class="n">localForm</span><span class="p">()</span> <span class="k">as</span> <span class="n">loc</span><span class="p">:</span>
+        <span class="n">loc</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">fem</span><span class="o">.</span><span class="n">petsc</span><span class="o">.</span><span class="n">assemble_vector</span><span class="p">(</span><span class="n">update_b</span><span class="p">,</span> <span class="n">update_L</span><span class="p">)</span>
+    <span class="n">update_b</span><span class="o">.</span><span class="n">ghostUpdate</span><span class="p">(</span><span class="n">addv</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">InsertMode</span><span class="o">.</span><span class="n">ADD_VALUES</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">PETSc</span><span class="o">.</span><span class="n">ScatterMode</span><span class="o">.</span><span class="n">REVERSE</span><span class="p">)</span>
+    <span class="n">solver3</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">update_b</span><span class="p">,</span> <span class="n">u_sol</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+    <span class="n">u_sol</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">scatter_forward</span><span class="p">()</span>
+
+    <span class="n">p_sol</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">axpy</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">deltaP</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+    <span class="n">p_sol</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">scatter_forward</span><span class="p">()</span>
+
+    <span class="c1"># Save solution</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">kk</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)):</span>
+        <span class="n">u_xdmf</span><span class="o">.</span><span class="n">write_function</span><span class="p">(</span><span class="n">u_sol</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">p_xdmf</span><span class="o">.</span><span class="n">write_function</span><span class="p">(</span><span class="n">p_sol</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">kk</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Update old</span>
+    <span class="k">with</span> <span class="n">u_sol</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">localForm</span><span class="p">()</span> <span class="k">as</span> <span class="n">loc_</span><span class="p">,</span> <span class="n">uOld</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">localForm</span><span class="p">()</span> <span class="k">as</span> <span class="n">loc_n</span><span class="p">:</span>
+        <span class="n">loc_</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">loc_n</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">p_sol</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">localForm</span><span class="p">()</span> <span class="k">as</span> <span class="n">loc_</span><span class="p">,</span> <span class="n">pOld</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">localForm</span><span class="p">()</span> <span class="k">as</span> <span class="n">loc_n</span><span class="p">:</span>
+        <span class="n">loc_</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">loc_n</span><span class="p">)</span>
+        
+<span class="n">u_xdmf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">p_xdmf</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="T=2" src="../_images/0100.png" /></p>
+<p><img alt="T=4" src="../_images/0200.png" /></p>
+<p><img alt="T=6" src="../_images/0300.png" /></p>
+<p><img alt="T=8" src="../_images/0400.png" /></p>
+<p><img alt="T=10" src="../_images/0500.png" /></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapter3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="unsteadyNS.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Unsteady Navier-Stokes</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="steadyBoussinesq.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Steady Navier-Stokes + energy equation (boussinesq)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Stefano Riva<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
