@@ -4,7 +4,7 @@ The Navier-Stokes equations describes the flows of incompressible viscous fluid
 \begin{equation}
 \left\{
     \begin{array}{ll}
-        \frac{\partial \mathbf{u}}{\partial t} +\left(\mathbf{u}\cdot \nabla\right)\mathbf{u}-\nu\Delta \mathbf{u}+\nabla p = 0 & \mbox{in }\Omega, \;t>0\\
+        \displaystyle\frac{\partial \mathbf{u}}{\partial t} +\left(\mathbf{u}\cdot \nabla\right)\mathbf{u}-\nu\Delta \mathbf{u}+\nabla p = 0 & \mbox{in }\Omega, \;t>0\\
         \nabla\cdot \mathbf{u} = 0 & \mbox{in }\Omega, \;t>0\\
         \mathbf{u}(\mathbf{x}, 0)=\mathbf{u}_0 & \mbox{in }\Omega\\
         \mathbf{u}=\mathbf{u}_D & \mbox{on }\Gamma_D, \;t>0\\
@@ -36,7 +36,7 @@ The continuity and the momentum balance from the NS equations in strong form are
 \begin{equation}
 \left\{
     \begin{array}{ll}
-        \frac{\tilde{\mathbf{u}}-\mathbf{u}^n}{\Delta t} +\left(\mathbf{u}^n\cdot \nabla\right)\tilde{\mathbf{u}}-\nu\Delta\tilde{\mathbf{u}}+\nabla p^n = 0 & \mbox{in }\Omega \\
+        \displaystyle\frac{\tilde{\mathbf{u}}-\mathbf{u}^n}{\Delta t} +\left(\mathbf{u}^n\cdot \nabla\right)\tilde{\mathbf{u}}-\nu\Delta\tilde{\mathbf{u}}+\nabla p^n = 0 & \mbox{in }\Omega \\
         \mathbf{u}=\mathbf{u}_D & \mbox{on }\Gamma_D\\
         \nu\frac{\partial \mathbf{u}}{\partial \mathbf{n}}=g\mathbf{n} & \mbox{on }\Gamma_N
      \end{array}
@@ -71,10 +71,12 @@ The weak formulation of this problem can be derived very easily.
 Once the pressure field is obtained and used to make the velocity field divergence-free, the update of the both fields is
 
 $$
-\frac{\mathbf{u}^{n+1} = \tilde{\mathbf{u}}}{\Delta t} -\Delta t\nabla \delta p = 0\qquad p^{n+1}=p^n+\delta p
+\mathbf{u}^{n+1} = \tilde{\mathbf{u}} -\Delta t\nabla \delta p = 0\qquad p^{n+1}=p^n+\delta p
 $$
 
 ## Direct numerical simulation of turbulent flows
+As the importance of the advection term $(\mathbf{u}\cdot\nabla)\mathbf{u}$ (i.e. inertia) increases over the viscous term $\nu\Delta\mathbf{u}$ (i.e. dissipation), the flow has a transition from laminar to turbulent.
+
 
 $$
 \frac{L_D}{L_0} \sim Re^{-3/4}\qquad 
