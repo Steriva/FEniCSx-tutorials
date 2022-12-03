@@ -60,7 +60,10 @@ A+C(\mathbf{U}) & B^T \\ B & 0
 \right]
 \end{equation}
 
-Different techniques can be used to linearised this system and get a solution. The treatment of the non-linearity is an important concern in the solution of the Navier-Stokes equations. Let us define the Reynolds number
+Different techniques can be used to linearised this system and get a solution. The treatment of the non-linearity is an important concern in the solution of the Navier-Stokes equations.
+
+## Treatment of the non-linear term
+Let us define the Reynolds number
 
 $$
 Re = \frac{\mbox{Inertia forces}}{\mbox{Viscous forces}}=\frac{U_0\cdot D_h}{\nu}
