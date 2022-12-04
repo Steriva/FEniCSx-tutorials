@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Steady Navier-Stokes + energy equation (boussinesq) &#8212; Tutorials for FEniCSx</title>
+    <title>Steady Navier-Stokes + Energy equation (Boussinesq) &#8212; Tutorials for FEniCSx</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -220,7 +220,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
-   Steady Navier-Stokes + energy equation (boussinesq)
+   Steady Navier-Stokes + Energy equation (Boussinesq)
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -402,23 +402,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivition-of-the-weak-formulation">
+   Derivition of the weak formulation
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Steady Navier-Stokes + energy equation (boussinesq)</h1>
+                <h1>Steady Navier-Stokes + Energy equation (Boussinesq)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivition-of-the-weak-formulation">
+   Derivition of the weak formulation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -427,19 +464,41 @@ title="Print to PDF"
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="steady-navier-stokes-energy-equation-boussinesq">
-<h1>Steady Navier-Stokes + energy equation (boussinesq)<a class="headerlink" href="#steady-navier-stokes-energy-equation-boussinesq" title="Permalink to this headline">#</a></h1>
-<p>The Stokes equations describes the flows of incompressible viscous fluid when the importance of inertia is low with respect to viscous forces</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1a0df59d-0acd-4bb1-80dc-95d32988404e">
-<span class="eqno">(34)<a class="headerlink" href="#equation-1a0df59d-0acd-4bb1-80dc-95d32988404e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<h1>Steady Navier-Stokes + Energy equation (Boussinesq)<a class="headerlink" href="#steady-navier-stokes-energy-equation-boussinesq" title="Permalink to this headline">#</a></h1>
+<p>In the previous tutorials, the dependence on the temperature was not considered assuming that the temperature itself can be considered as a passive scalar advected by the flow. However, if the temperature variation is sufficiently high the thermophysical properties changes. This makes necessary the introduction of the energy balance to the Navier-Stokes equations, furthermore the incompressibility assumption may not be valid anymore.</p>
+<p>If the temperature variations is sufficiently low, the flow can still be considered incompressible introducing the Boussinesq approximation which results in a linear dependence of the density on the temperature</p>
+<div class="math notranslate nohighlight">
+\[
+\rho \simeq \rho_0\,\left[1+\beta(T-T_{ref})\right]
+\]</div>
+<p>In the end, the steady Navier-Stokes equations and the energy equation under the Boussinesq approximation result in</p>
+<div class="amsmath math notranslate nohighlight" id="equation-43366c4f-61e2-4bc7-aeb1-ea0cbac20b9d">
+<span class="eqno">(34)<a class="headerlink" href="#equation-43366c4f-61e2-4bc7-aeb1-ea0cbac20b9d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
-    \begin{array}{ll}
-        \nu\Delta \mathbf{u}-\nabla p = 0 &amp; \mbox{in }\Omega\\
-        \nabla\cdot \mathbf{u} = 0 &amp; \mbox{in }\Omega\\
-        \mathbf{u}=\mathbf{u}_D &amp; \mbox{on }\Gamma_D\\
-        \nu\frac{\partial \mathbf{u}}{\partial \mathbf{n}}-p\mathbf{n}=g\mathbf{n} &amp; \mbox{on }\Gamma_N
-    \end{array}
+\begin{array}{ll}
+    \nabla \cdot \mathbf{u} =0&amp; in\;\Omega\\
+    \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p &amp; in\;\Omega\\ 
+    \mathbf{u}\cdot \nabla T = \alpha \Delta T&amp; in\;\Omega\\&amp; \\
+    \mathbf{u} = \mathbf{u}_D,\; T=T_D &amp; on\;\Gamma_{D}\\
+    \mathbf{u} = \mathbf{0},\;-k\frac{\partial T}{\partial \mathbf{n}}=q &amp; on\;\Gamma_{w}\\
+    \nu\frac{\partial \mathbf{u}}{\partial \mathbf{n}}-p\mathbf{n}=g\mathbf{n},\;
+    \frac{\partial T}{\partial \mathbf{n}}=0  &amp; \mbox{on }\Gamma_N
+\end{array}
 \right.
 \end{equation}\]</div>
+<div class="section" id="derivition-of-the-weak-formulation">
+<h2>Derivition of the weak formulation<a class="headerlink" href="#derivition-of-the-weak-formulation" title="Permalink to this headline">#</a></h2>
+<div class="amsmath math notranslate nohighlight" id="equation-40e70279-3189-459a-8eaa-718c291449ca">
+<span class="eqno">(35)<a class="headerlink" href="#equation-40e70279-3189-459a-8eaa-718c291449ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\begin{split}
+The problem we want to face is non-linear, whose weak formulation reads:
+\begin{equation}
+    \int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega- \beta\int_\Omega(T-T_{ref})\mathbf{g}\cdot \mathbf{v}\,d\Omega &amp;=0\\
+    -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega &amp;=0\\
+    \int_\Omega \mathbf{u}\cdot \nabla T \, \phi\,d\Omega+\int_\Omega \alpha\nabla T \cdot \nabla\phi\,d\Omega&amp;=0
+\end{split}
+\end{equation}\]</div>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </div>
