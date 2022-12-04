@@ -77,6 +77,7 @@ $$
 ## Direct numerical simulation of turbulent flows
 As the importance of the advection term $(\mathbf{u}\cdot\nabla)\mathbf{u}$ (i.e. inertia) increases over the viscous term $\nu\Delta\mathbf{u}$ (i.e. dissipation), the flow has a transition from laminar to turbulent.
 
+Turbulent flows are characterised by structures called eddies, the dimension of these ranges from small to large scale. As the characteristic length decreases, the importance of dissipation becomes more and more important, thus a direct numerical simulation must be sufficiently accurate to resolve completely the small scale, in which dissipation occurs. From Kolmogorov's theory of turbulence the following relations can be derived {cite}`davidson2015turbulence`
 
 $$
 \frac{L_D}{L_0} \sim Re^{-3/4}\qquad 
@@ -84,3 +85,7 @@ $$
 \mathbf{t_D}{t_0}\sim Re^{-1/2}\qquad
 Re = \frac{U_0L_0}{\nu}
 $$
+
+Let us assume to have to perform a 3D simulation characterised by a macroscopic Reynolds number $Re \sim 10^6$, the numerical grid should have $N\sim Re^{3/4}$ elements per each components, hence the grid should have $\mathcal{N}_h\sim Re^{9/4}\approx 10^{13}$ elements for space. This makes the direct numerical simulation usually unfeasible. 
+
+In order to overcome this issue, turbulence modelling is introduced through averaging (RANS) or filtering (LES).

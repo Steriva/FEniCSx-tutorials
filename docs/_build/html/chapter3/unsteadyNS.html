@@ -510,8 +510,8 @@ title="Print to PDF"
   <div class="tex2jax_ignore mathjax_ignore section" id="unsteady-navier-stokes">
 <h1>Unsteady Navier-Stokes<a class="headerlink" href="#unsteady-navier-stokes" title="Permalink to this headline">#</a></h1>
 <p>The Navier-Stokes equations describes the flows of incompressible viscous fluid</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d8c3ad89-a6ae-4d06-a065-d99dc51c0713">
-<span class="eqno">(23)<a class="headerlink" href="#equation-d8c3ad89-a6ae-4d06-a065-d99dc51c0713" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4b7bd0c9-c304-480d-8258-a437709f965d">
+<span class="eqno">(23)<a class="headerlink" href="#equation-4b7bd0c9-c304-480d-8258-a437709f965d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         \displaystyle\frac{\partial \mathbf{u}}{\partial t} +\left(\mathbf{u}\cdot \nabla\right)\mathbf{u}-\nu\Delta \mathbf{u}+\nabla p = 0 &amp; \mbox{in }\Omega, \;t&gt;0\\
@@ -522,7 +522,7 @@ title="Print to PDF"
     \end{array}
 \right.
 \end{equation}\]</div>
-<p>Similar consideration made for the stationary case can be made even for the unsteady one. We are dealing with a non-linear parabolic problem, here we will present of the most famous algorithm to solve the unsteady Navier-Stokes equations, i.e. the incremental Chorin-Theman algorithm <span id="id1">[<a class="reference internal" href="../biblio.html#id5" title="Alexandre Joel Chorin. Numerical solution of the navier-stokes equations. Mathematics of Computation, 22(104):745–762, 1968.">1</a>]</span>.</p>
+<p>Similar consideration made for the stationary case can be made even for the unsteady one. We are dealing with a non-linear parabolic problem, here we will present of the most famous algorithm to solve the unsteady Navier-Stokes equations, i.e. the incremental Chorin-Theman algorithm <span id="id1">[<a class="reference internal" href="../biblio.html#id5" title="Alexandre Joel Chorin. Numerical solution of the navier-stokes equations. Mathematics of Computation, 22(104):745–762, 1968.">7</a>]</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mathcal{V}\subset[\mathcal{H}^1]^d,\; \mathcal{V}_0[\subset\mathcal{H}^1]^d\)</span> the velocity trial and test spaces defined as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -530,19 +530,19 @@ title="Print to PDF"
 \mathcal{V}_0 = \left\{\mathbf{v}\in[\mathcal{H}^1(\Omega)]^d:\;\left. \mathbf{v}\right|_{\Gamma_D} = \mathbf{0}\right\}
 \]</div>
 <p>and let <span class="math notranslate nohighlight">\(\mathcal{Q}= L^2(\Omega)\)</span> the pressure trial and test space. The continuity and momentum equation can be multiplied by the test functions <span class="math notranslate nohighlight">\(\mathbf{v}\in\mathcal{V}_0,\;q\in\mathcal{Q}\)</span>, so the weak formulation reads: <em>find <span class="math notranslate nohighlight">\((\mathbf{u}(t), p(t))\in\mathcal{V}\times\mathcal{Q}\)</span> s.t.</em></p>
-<div class="amsmath math notranslate nohighlight" id="equation-259a71e3-e5a7-4f44-8bff-573697413990">
-<span class="eqno">(24)<a class="headerlink" href="#equation-259a71e3-e5a7-4f44-8bff-573697413990" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-526d5742-63ca-422c-adee-f8f3f309a517">
+<span class="eqno">(24)<a class="headerlink" href="#equation-526d5742-63ca-422c-adee-f8f3f309a517" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \frac{\partial \mathbf{u}}{\partial t} \cdot \mathbf{v}\,d\Omega +\int_\Omega \left[\left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\right]\cdot \mathbf{v}\,d\Omega+\int_\Omega \nu\nabla \mathbf{u}\cdot \nabla\mathbf{v}\,d\Omega -\int_\Omega p \nabla\cdot \mathbf{v}\,d\Omega - \int_\Omega q \nabla\cdot \mathbf{u}\,d\Omega = \int_{\Gamma_N} g\mathbf{n}\cdot \mathbf{v}\,d\sigma \qquad \forall (\mathbf{v}, q)\in\mathcal{V}_0\times\mathcal{Q}
 \end{equation}\]</div>
 <div class="section" id="chorin-theman-algorithm">
 <h2>Chorin-Theman algorithm<a class="headerlink" href="#chorin-theman-algorithm" title="Permalink to this headline">#</a></h2>
 <p>From the weak formulation a discrete system of non-linear ODEs can be derived and theoretically solved, the dimension of the system usually to large preventing a straightforward numerical solution. Therefore, the state-of-the-art for solving the Navier-Stokes system consists of fractional step (or projection) methods.</p>
-<p>The pioneering work of <span id="id2">[<a class="reference internal" href="../biblio.html#id5" title="Alexandre Joel Chorin. Numerical solution of the navier-stokes equations. Mathematics of Computation, 22(104):745–762, 1968.">1</a>]</span> was the inspiration for all successive developments. Here we will present a strategy quite similar to the original one, useful when laminar flows are simulated. The discrete time algorithm is made of 2 main steps, followed by the update one.</p>
+<p>The pioneering work of <span id="id2">[<a class="reference internal" href="../biblio.html#id5" title="Alexandre Joel Chorin. Numerical solution of the navier-stokes equations. Mathematics of Computation, 22(104):745–762, 1968.">7</a>]</span> was the inspiration for all successive developments. Here we will present a strategy quite similar to the original one, useful when laminar flows are simulated. The discrete time algorithm is made of 2 main steps, followed by the update one.</p>
 <div class="section" id="prediction">
 <h3>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">#</a></h3>
 <p>The continuity and the momentum balance from the NS equations in strong form are separated. At first, the momentum solved at time <span class="math notranslate nohighlight">\(t^{n+1}\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-5ae5092b-6ae9-49f5-8f50-c20da6f725aa">
-<span class="eqno">(25)<a class="headerlink" href="#equation-5ae5092b-6ae9-49f5-8f50-c20da6f725aa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d92ecf6f-a704-480c-b0ff-a9a691e915ee">
+<span class="eqno">(25)<a class="headerlink" href="#equation-d92ecf6f-a704-480c-b0ff-a9a691e915ee" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         \displaystyle\frac{\tilde{\mathbf{u}}-\mathbf{u}^n}{\Delta t} +\left(\mathbf{u}^n\cdot \nabla\right)\tilde{\mathbf{u}}-\nu\Delta\tilde{\mathbf{u}}+\nabla p^n = 0 &amp; \mbox{in }\Omega \\
@@ -563,8 +563,8 @@ title="Print to PDF"
  \]</div>
 <p>If these two equations are summed, the NS momentum equation discretised using an implicit Euler scheme (with a semi-implicit treatment of the non-linear term) is retrieved.</p>
 <p>Let us impose <span class="math notranslate nohighlight">\(\nabla \cdot \mathbf{u}^{n+1}=0\)</span>, thus the following Poisson problem is obtained</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d509142b-4c3e-4dad-8e0f-8c4810dce0dd">
-<span class="eqno">(26)<a class="headerlink" href="#equation-d509142b-4c3e-4dad-8e0f-8c4810dce0dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f767533d-0967-41a7-9b38-8eba34fac887">
+<span class="eqno">(26)<a class="headerlink" href="#equation-f767533d-0967-41a7-9b38-8eba34fac887" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
     \begin{array}{ll}
         \nabla\cdot\mathbf{u}^n =\Delta t\,\Delta \delta p &amp; \mbox{in }\Omega \\
@@ -587,6 +587,7 @@ title="Print to PDF"
 <div class="section" id="direct-numerical-simulation-of-turbulent-flows">
 <h2>Direct numerical simulation of turbulent flows<a class="headerlink" href="#direct-numerical-simulation-of-turbulent-flows" title="Permalink to this headline">#</a></h2>
 <p>As the importance of the advection term <span class="math notranslate nohighlight">\((\mathbf{u}\cdot\nabla)\mathbf{u}\)</span> (i.e. inertia) increases over the viscous term <span class="math notranslate nohighlight">\(\nu\Delta\mathbf{u}\)</span> (i.e. dissipation), the flow has a transition from laminar to turbulent.</p>
+<p>Turbulent flows are characterised by structures called eddies, the dimension of these ranges from small to large scale. As the characteristic length decreases, the importance of dissipation becomes more and more important, thus a direct numerical simulation must be sufficiently accurate to resolve completely the small scale, in which dissipation occurs. From Kolmogorov’s theory of turbulence the following relations can be derived <span id="id3">[<a class="reference internal" href="../biblio.html#id10" title="P Davidson. Turbulence: An Introduction for Scientists and Engineers. Oxford University Press, 2015. ISBN 9780198722595. URL: https://books.google.it/books?id=VblDCQAAQBAJ.">6</a>]</span></p>
 <div class="math notranslate nohighlight">
 \[
 \frac{L_D}{L_0} \sim Re^{-3/4}\qquad 
@@ -594,6 +595,8 @@ title="Print to PDF"
 \mathbf{t_D}{t_0}\sim Re^{-1/2}\qquad
 Re = \frac{U_0L_0}{\nu}
 \]</div>
+<p>Let us assume to have to perform a 3D simulation characterised by a macroscopic Reynolds number <span class="math notranslate nohighlight">\(Re \sim 10^6\)</span>, the numerical grid should have <span class="math notranslate nohighlight">\(N\sim Re^{3/4}\)</span> elements per each components, hence the grid should have <span class="math notranslate nohighlight">\(\mathcal{N}_h\sim Re^{9/4}\approx 10^{13}\)</span> elements for space. This makes the direct numerical simulation usually unfeasible.</p>
+<p>In order to overcome this issue, turbulence modelling is introduced through averaging (RANS) or filtering (LES).</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
