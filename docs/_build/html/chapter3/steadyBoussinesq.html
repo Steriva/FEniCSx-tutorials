@@ -472,12 +472,12 @@ title="Print to PDF"
 \rho \simeq \rho_0\,\left[1+\beta(T-T_{ref})\right]
 \]</div>
 <p>In the end, the steady Navier-Stokes equations and the energy equation under the Boussinesq approximation result in</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b12cf159-a5f3-462d-a062-eb2fb06b9eec">
-<span class="eqno">(34)<a class="headerlink" href="#equation-b12cf159-a5f3-462d-a062-eb2fb06b9eec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-db29d274-fb79-4d39-9c08-a4f59c04adb4">
+<span class="eqno">(34)<a class="headerlink" href="#equation-db29d274-fb79-4d39-9c08-a4f59c04adb4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \nabla \cdot \mathbf{u} =0&amp; in\;\Omega\\
-    \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p -\beta\int_\Omega(T-T_{ref})\mathbf{g} &amp; in\;\Omega\\ 
+    \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p -\beta(T-T_{ref})\mathbf{g} &amp; in\;\Omega\\ 
     \mathbf{u}\cdot \nabla T = \alpha \Delta T&amp; in\;\Omega\\&amp; \\
     \mathbf{u} = \mathbf{u}_D,\; T=T_D &amp; on\;\Gamma_{D}\\
     \mathbf{u} = \mathbf{0},\;-k\frac{\partial T}{\partial \mathbf{n}}=q &amp; on\;\Gamma_{w}\\
@@ -486,17 +486,19 @@ title="Print to PDF"
 \end{array}
 \right.
 \end{equation}\]</div>
+<p>This approximation is used to study steady buoyancy-driven flows.</p>
 <div class="section" id="derivition-of-the-weak-formulation">
 <h2>Derivition of the weak formulation<a class="headerlink" href="#derivition-of-the-weak-formulation" title="Permalink to this headline">#</a></h2>
 <p>The problem we want to face is non-linear, whose weak formulation reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-024f0918-4ffa-43d1-9035-f1156f7d4679">
-<span class="eqno">(35)<a class="headerlink" href="#equation-024f0918-4ffa-43d1-9035-f1156f7d4679" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bc5c6d90-a5bd-4a48-8330-7780faf11d13">
+<span class="eqno">(35)<a class="headerlink" href="#equation-bc5c6d90-a5bd-4a48-8330-7780faf11d13" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \begin{split}
         \int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega- \beta\int_\Omega(T-T_{ref})\mathbf{g}\cdot \mathbf{v}\,d\Omega &amp;=0\\
         -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega &amp;=0\\
         \int_\Omega \mathbf{u}\cdot \nabla T \, \phi\,d\Omega+\int_\Omega \alpha\nabla T \cdot \nabla\phi\,d\Omega&amp;=0
     \end{split}
 \end{equation}\]</div>
+<p>Thus a proper non-linear solver should be implemented</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>

@@ -459,12 +459,12 @@ title="Print to PDF"
 <h1>Buoyant Cavity (2D)<a class="headerlink" href="#buoyant-cavity-2d" title="Permalink to this headline">#</a></h1>
 <p>This notebook implements a steady incompressible Navier-Stokes solver + energy equation for the buoyant cavity problem.</p>
 <p>The problem is strong form reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8aef3ad1-2f9b-4433-a69f-5c80d226bdc1">
-<span class="eqno">(36)<a class="headerlink" href="#equation-8aef3ad1-2f9b-4433-a69f-5c80d226bdc1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-15cb70e9-74b4-40fa-a9fa-fd54ce209b10">
+<span class="eqno">(36)<a class="headerlink" href="#equation-15cb70e9-74b4-40fa-a9fa-fd54ce209b10" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{ll}
     \nabla \cdot \mathbf{u} =0&amp; in\;\Omega\\
-    \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p &amp; in\;\Omega\\ 
+    \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p -\beta(T-T_{ref})\mathbf{g} &amp; in\;\Omega\\  
     \mathbf{u}\cdot \nabla T = \alpha \Delta T&amp; in\;\Omega\\&amp; \\
     \mathbf{u} = \mathbf{j},\; T=T_H &amp; on\;\Gamma_{hot}\\
     \mathbf{u} = \mathbf{j},\; T=T_C &amp; on\;\Gamma_{cold}\\
@@ -505,8 +505,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>The problem we want to face is non-linear, whose weak formulation reads:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-442e6a86-2b32-4b91-be25-55942ddee4d0">
-<span class="eqno">(37)<a class="headerlink" href="#equation-442e6a86-2b32-4b91-be25-55942ddee4d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a61c6cdd-1d03-44f0-bc1e-ab537ec09b2d">
+<span class="eqno">(37)<a class="headerlink" href="#equation-a61c6cdd-1d03-44f0-bc1e-ab537ec09b2d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \int_\Omega \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}\cdot \mathbf{v}\,d\Omega + \nu \int_\Omega\nabla \mathbf{u}\cdot \nabla \mathbf{v}\,d\Omega -\int_\Omega p(\nabla\cdot\mathbf{v})\,d\Omega -\int_\Omega q(\nabla\cdot\mathbf{u})\,d\Omega - \beta\int_\Omega(T-T_{ref})\mathbf{g}\cdot \mathbf{v}\,d\Omega + \int_\Omega \mathbf{u}\cdot \nabla T \, \phi\,d\Omega+\int_\Omega \alpha\nabla T \cdot \nabla\phi\,d\Omega=0
 \end{equation}\]</div>
 <div class="cell docutils container">

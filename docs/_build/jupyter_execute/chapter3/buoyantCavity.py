@@ -9,7 +9,7 @@
 # \left\{
 # \begin{array}{ll}
 #     \nabla \cdot \mathbf{u} =0& in\;\Omega\\
-#     \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p & in\;\Omega\\ 
+#     \displaystyle \left(\mathbf{u}\cdot \nabla\right)\mathbf{u}= \nu\Delta \mathbf{u}-\nabla p -\beta(T-T_{ref})\mathbf{g} & in\;\Omega\\  
 #     \mathbf{u}\cdot \nabla T = \alpha \Delta T& in\;\Omega\\& \\
 #     \mathbf{u} = \mathbf{j},\; T=T_H & on\;\Gamma_{hot}\\
 #     \mathbf{u} = \mathbf{j},\; T=T_C & on\;\Gamma_{cold}\\
