@@ -5,7 +5,7 @@ Point(2)  = {  1,  -1, 0, 1.0};
 Point(3)  = {  1,   1, 0, 1.0};
 Point(4)  = { -1,   1, 0, 1.0};
 
-Mesh.MeshSizeFactor = 0.1;
+Mesh.MeshSizeFactor = 0.08;
 //+
 Line(1) = {1, 2};
 //+
