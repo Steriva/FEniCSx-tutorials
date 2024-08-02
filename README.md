@@ -1,4 +1,2 @@
 # FEniCSx Tutorials
-This repository collects some useful tutorials for the Finite Element library [FEniCSx](https://fenicsproject.org) for Python.
-
-A documentation is available at [https://steriva.github.io/FEniCSx-tutorials](https://steriva.github.io/FEniCSx-tutorials).
+The files of this repository have been moved to [https://github.com/ERMETE-Lab/MP-OFELIA](https://github.com/ERMETE-Lab/MP-OFELIA).
